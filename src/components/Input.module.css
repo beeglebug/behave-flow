@@ -1,0 +1,21 @@
+.input {
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #4c525f;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.label {
+  margin-right: 10px;
+}
