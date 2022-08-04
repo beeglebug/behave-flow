@@ -3,16 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Handle, Position } from "react-flow-renderer";
 import { Row } from "./Row";
 
-export type FlowRowProps = { type: "source" | "target" };
+export type FlowRowProps = { target?: boolean; source?: boolean };
 
-export default function FlowRow({ type }: FlowRowProps) {
+export default function FlowRow({ target, source }: FlowRowProps) {
   return (
-    <Row align={type === "target" ? "left" : "right"}>
-      <Handle
-        id="flow"
-        type={type}
-        position={type === "target" ? Position.Left : Position.Right}
-      />
+    <Row align="center">
+      {target && <Handle id="flow" type="target" position={Position.Left} />}
+      {source && <Handle id="flow" type="source" position={Position.Right} />}
       <FontAwesomeIcon icon={faArrowRight} color="#ffffff" size="lg" />
     </Row>
   );

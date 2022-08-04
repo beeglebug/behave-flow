@@ -5,7 +5,7 @@ import Node from "../components/Node";
 export default function EventStartNode({ data }: NodeProps) {
   return (
     <Node title="Event / Start">
-      <FlowRow type="source" />
+      <FlowRow source />
     </Node>
   );
 }

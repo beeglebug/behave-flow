@@ -8,29 +8,31 @@ import StateSetNode from "../nodes/StateSetNode";
 import StateGetNode from "../nodes/StateGetNode";
 
 import UnaryOperationNode from "../nodes/UnaryOperationNode";
+import TimeDelayNode from "../nodes/TimeDelayNode";
 
 export const customNodeTypes: NodeTypes = {
-  actionLog: ActionLogNode,
-  eventStart: EventStartNode,
-  flowBranch: FlowBranchNode,
-  logicNumberToString: (props) => (
+  "action/log": ActionLogNode,
+  "event/start": EventStartNode,
+  "flow/branch": FlowBranchNode,
+  "time/delay": TimeDelayNode,
+  "logic/numberToString": (props) => (
     <UnaryOperationNode title="Logic / Number To String" {...props} />
   ),
-  stateSetNumber: StateSetNode,
-  stateGetNumber: StateGetNode,
-  logicNumberConstant: (props) => (
+  "state/setNumber": StateSetNode,
+  "state/getNumber": StateGetNode,
+  "logic/numberConstant": (props) => (
     <SingleInputNode title="Logic / Number Constant" {...props} />
   ),
-  logicNumberAdd: (props) => (
+  "logic/numberAdd": (props) => (
     <BinaryOperationNode title="Logic / Number Add" {...props} />
   ),
-  logicNumberMultiply: (props) => (
+  "logic/numberMultiply": (props) => (
     <BinaryOperationNode title="Logic / Number Multiply" {...props} />
   ),
-  logicNumberPow: (props) => (
+  "logic/numberPow": (props) => (
     <BinaryOperationNode title="Logic / Number Pow" {...props} />
   ),
-  logicNumberNegate: (props) => (
+  "logic/numberNegate": (props) => (
     <UnaryOperationNode title="Logic / Number Negate" {...props} />
   ),
 };

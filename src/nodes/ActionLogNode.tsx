@@ -8,7 +8,7 @@ export default function ActionLogNode({ id, data }: NodeProps) {
   const edges = useEdges();
   return (
     <Node title="Action / Log">
-      <FlowRow type="target" />
+      <FlowRow target source />
       <InputRow
         label="Text"
         value={data.text}

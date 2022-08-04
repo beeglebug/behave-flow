@@ -1,6 +1,7 @@
-import { FC, useRef, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import { useOnPressKey } from "../hooks/useOnPressKey";
-import graphJSON from "../graph.json";
+import { useEdges, useNodes } from "react-flow-renderer";
+import { flowToBehave } from "../transformers/flowToBehave";
 
 export type SaveModalProps = { open?: boolean; onClose: () => void };
 
@@ -9,9 +10,14 @@ export const SaveModal: FC<SaveModalProps> = ({ open = false, onClose }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const [copied, setCopied] = useState(false);
 
+  const edges = useEdges();
+  const nodes = useNodes();
+
+  const flow = useMemo(() => flowToBehave(nodes, edges), [nodes, edges]);
+
   if (open === false) return null;
 
-  const jsonString = JSON.stringify(graphJSON, null, 2);
+  const jsonString = JSON.stringify(flow, null, 2);
 
   const handleCopy = () => {
     ref.current?.select();

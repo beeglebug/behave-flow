@@ -1,11 +1,7 @@
 import { GraphJSON } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer";
 
-function camelize(str: string) {
-  return str.replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
-}
-
-export const parseGraph = (graph: GraphJSON): [Node[], Edge[]] => {
+export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
@@ -14,7 +10,7 @@ export const parseGraph = (graph: GraphJSON): [Node[], Edge[]] => {
   graph.forEach((nodeJSON, ix) => {
     const node = {
       id: String(ix),
-      type: camelize(nodeJSON.type.replace("/", " ")),
+      type: nodeJSON.type,
       position: { x, y: 0 },
       data: {} as { [key: string]: any },
     };

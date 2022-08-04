@@ -10,18 +10,21 @@ import ReactFlow, {
   EdgeChange,
   NodeChange,
 } from "react-flow-renderer";
-import { parseGraph } from "./util/parseGraph";
+import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/BehaveControls";
 import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
+import { flowToBehave } from "./transformers/flowToBehave";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 
-const [initialNodes, initialEdges] = parseGraph(graphJSON);
+const [initialNodes, initialEdges] = behaveToFlow(graphJSON);
 
-// console.log(initialNodes, initialEdges);
+const output = flowToBehave(initialNodes, initialEdges);
+
+console.log(graphJSON, output, initialNodes, initialEdges);
 
 function Flow() {
   const [nodes, setNodes] = useState(initialNodes);
@@ -62,6 +65,11 @@ function Flow() {
     ]);
   };
 
+  const handleRun = () => {
+    const graph = flowToBehave(nodes, edges);
+    exec(graph);
+  };
+
   return (
     <ReactFlow
       nodeTypes={customNodeTypes}
@@ -79,7 +87,7 @@ function Flow() {
         color="#353639"
         style={{ backgroundColor: "#1E1F22" }}
       />
-      <BehaveControls onRun={() => exec(graphJSON)} onAdd={handleAddNode} />
+      <BehaveControls onRun={handleRun} onAdd={handleAddNode} />
     </ReactFlow>
   );
 }

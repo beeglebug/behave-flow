@@ -1,5 +1,8 @@
+import { GraphJSON } from "behave-graph";
 import { FC, useState } from "react";
+import { useReactFlow } from "react-flow-renderer";
 import { useOnPressKey } from "../hooks/useOnPressKey";
+import { behaveToFlow } from "../transformers/behaveToFlow";
 
 export type LoadModalProps = {
   open?: boolean;
@@ -9,11 +12,17 @@ export type LoadModalProps = {
 export const LoadModal: FC<LoadModalProps> = ({ open = false, onClose }) => {
   useOnPressKey("Escape", onClose);
   const [value, setValue] = useState<string>();
+  const instance = useReactFlow();
 
   if (open === false) return null;
 
   const handleLoad = () => {
-    console.log(value);
+    if (value === undefined) return;
+    const graph = JSON.parse(value) as GraphJSON;
+    const [nodes, edges] = behaveToFlow(graph);
+    instance.setNodes(nodes);
+    instance.setEdges(edges);
+    setValue(undefined);
     onClose();
   };
 

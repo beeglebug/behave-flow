@@ -9,7 +9,7 @@ export default function FlowBranchNode({
 }: NodeProps<{ condition: boolean }>) {
   return (
     <Node title="Flow / Branch">
-      <FlowRow type="target" />
+      <FlowRow target />
       <BooleanRow
         label="Condition"
         value={data.condition}

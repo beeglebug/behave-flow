@@ -6,8 +6,8 @@ import Node from "../components/Node";
 export default function StateSetNode({ data }: NodeProps) {
   return (
     <Node title="State / Set">
-      <FlowRow type="target" />
-      <FlowRow type="source" />
+      <FlowRow target />
+      <FlowRow source />
       <InputRow label="ID" value={data.identifier} handleId="identifier" />
       <InputRow label="Value" value={data.value} handleId="result" />
     </Node>
