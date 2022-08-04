@@ -1,4 +1,3 @@
-import { GraphJSON } from "behave-graph";
 import { useCallback, useState } from "react";
 import ReactFlow, {
   addEdge,
@@ -16,12 +15,13 @@ import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/BehaveControls";
 import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
+import { GraphJSON } from "./types";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = parseGraph(graphJSON);
 
-console.log(initialNodes, initialEdges);
+// console.log(initialNodes, initialEdges);
 
 function Flow() {
   const [nodes, setNodes] = useState(initialNodes);

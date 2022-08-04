@@ -1,5 +1,5 @@
-import { GraphJSON } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer";
+import { GraphJSON } from "../types";
 
 function camelize(str: string) {
   return str.replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
