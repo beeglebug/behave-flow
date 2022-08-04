@@ -1,5 +1,4 @@
 import { Handle, Position } from "react-flow-renderer";
-import styles from "./InputRow.module.css";
 import { Row } from "./Row";
 
 type InputRowProps = {
@@ -19,11 +18,11 @@ export default function InputRow({
 }: InputRowProps) {
   return (
     <Row>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && <label className="mr-2">{label}</label>}
       <input
         type="text"
         disabled={disabled}
-        className={styles.input}
+        className=" bg-gray-600 disabled:bg-gray-700  py-1 px-2"
         value={value}
         onChange={() => {}}
       />

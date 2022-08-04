@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
-import styles from "./Row.module.css";
 import cx from "classnames";
 
 type RowProps = { children?: ReactNode; align?: "left" | "right" };
 
 export const Row = ({ children, align = "left" }: RowProps) => (
   <div
-    className={cx(styles.row, align === "left" ? styles.left : styles.right)}
+    className={cx(
+      "flex relative p-2 items-center",
+      align === "left" ? "justify-start" : "justify-end"
+    )}
   >
     {children}
   </div>
