@@ -28,13 +28,17 @@ function Flow() {
   const [edges, setEdges] = useState(initialEdges);
 
   const onNodesChange = useCallback(
-    (changes: NodeChange[]) =>
-      setNodes((nds) => applyNodeChanges(changes, nds)),
+    (changes: NodeChange[]) => {
+      setNodes((nds) => applyNodeChanges(changes, nds));
+      // TODO update the behave graph
+    },
     [setNodes]
   );
   const onEdgesChange = useCallback(
-    (changes: EdgeChange[]) =>
-      setEdges((eds) => applyEdgeChanges(changes, eds)),
+    (changes: EdgeChange[]) => {
+      setEdges((eds) => applyEdgeChanges(changes, eds));
+      // TODO update the behave graph
+    },
     [setEdges]
   );
 
@@ -42,6 +46,21 @@ function Flow() {
     (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
     [setEdges]
   );
+
+  const handleAddNode = (nodeType: string) => {
+    const nextId = Math.random().toString();
+    onNodesChange([
+      {
+        type: "add",
+        item: {
+          id: nextId,
+          type: nodeType,
+          position: { x: 0, y: -200 },
+          data: {},
+        },
+      },
+    ]);
+  };
 
   return (
     <ReactFlow
@@ -60,7 +79,7 @@ function Flow() {
         color="#353639"
         style={{ backgroundColor: "#1E1F22" }}
       />
-      <BehaveControls onRun={() => exec(graphJSON)} />
+      <BehaveControls onRun={() => exec(graphJSON)} onAdd={handleAddNode} />
     </ReactFlow>
   );
 }

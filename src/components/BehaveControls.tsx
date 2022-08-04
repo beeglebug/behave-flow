@@ -1,26 +1,32 @@
-import { FC } from "react";
-import { faCaretRight, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FC, useState } from "react";
 import { customNodeTypes } from "../util/customNodeTypes";
 
-export type BehaveControlsProps = { onRun: () => void };
+export type BehaveControlsProps = {
+  onRun: () => void;
+  onAdd: (nodeType: string) => void;
+};
 
 const nodes = Object.keys(customNodeTypes).map((key) => key);
 
-const BehaveControls: FC<BehaveControlsProps> = ({ onRun }) => {
+const BehaveControls: FC<BehaveControlsProps> = ({ onRun, onAdd }) => {
+  const [nodeType, setNodeType] = useState(nodes[0]);
   return (
     <div className="absolute top-4 right-4 bg-white p-2 z-10 text-sm">
       <div className="mb-2">
-        <select className="border p-2">
+        <select
+          className="border p-2"
+          value={nodeType}
+          onChange={(e) => setNodeType(e.currentTarget.value)}
+        >
           {nodes.map((name) => (
-            <option>{name}</option>
+            <option key={name}>{name}</option>
           ))}
         </select>
       </div>
       <div className="mb-2">
         <button
           className="bg-neutral-400 text-white p-2 w-full cursor-pointer hover:bg-neutral-500"
-          onClick={onRun}
+          onClick={() => onAdd(nodeType)}
         >
           Add Node
         </button>
