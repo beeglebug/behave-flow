@@ -15,7 +15,7 @@ import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/BehaveControls";
 import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
-import { GraphJSON } from "./types";
+import { GraphJSON } from "behave-graph";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 

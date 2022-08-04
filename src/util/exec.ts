@@ -1,20 +1,18 @@
-// import {
-//   GraphEvaluator,
-//   GraphJSON,
-//   GraphTypeRegistry,
-//   readGraphFromJSON,
-//   registerGenericNodes,
-// } from "behave-graph";
+import {
+  GraphEvaluator,
+  GraphJSON,
+  GraphTypeRegistry,
+  readGraphFromJSON,
+  registerGenericNodes,
+} from "behave-graph";
 
-import { GraphJSON } from "../types";
+const registry = new GraphTypeRegistry();
 
-// const registry = new GraphTypeRegistry();
-
-// registerGenericNodes(registry);
+registerGenericNodes(registry);
 
 export const exec = async (graphJson: GraphJSON) => {
-  // const graph = readGraphFromJSON(graphJson, registry);
-  // const evaluator = new GraphEvaluator(graph);
-  // evaluator.triggerEvents("event/start");
-  // return await evaluator.executeAllAsync();
+  const graph = readGraphFromJSON(graphJson, registry);
+  const evaluator = new GraphEvaluator(graph);
+  evaluator.triggerEvents("event/start");
+  return await evaluator.executeAllAsync();
 };
