@@ -1,10 +1,8 @@
 .node {
   background: #1E242F;
   border: 1px solid #B8350A;
-
   color: #FFF;
   font-size: 12px;
-
   min-width: 150px;
 }
 
@@ -16,19 +14,4 @@
   align-items: center;
   background-color: #B8350A;
 
-}
-
-.body {
-  padding: 0 10px;
-}
-
-.close {
-  appearance: none;
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  color: #FFF;
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
 }

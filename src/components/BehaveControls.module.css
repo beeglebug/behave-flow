@@ -3,12 +3,10 @@
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  border: 1px solid transparent;
-  padding: 0;
-  height: 20px;
+  border: none;
+  padding: 5px;
   cursor: pointer;
   width: 100%;
-  border-radius: 0.25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
   color: #fff;
@@ -18,11 +16,17 @@
 
 .button:hover {
   background-color: #138496;
-  border-color: #117a8b;
 }
 
-.row {
-  height: 40px;
-  display: flex;
-  align-items: center;
+.button svg {
+  padding: 0 5px 0 3px;
+}
+
+.controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #fff;
+  z-index: 5;
+  padding: 5px;
 }

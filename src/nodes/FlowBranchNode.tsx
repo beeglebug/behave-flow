@@ -1,32 +1,22 @@
-import { Handle, NodeProps, Position } from "react-flow-renderer";
-import Input from "../components/Input";
+import { NodeProps } from "react-flow-renderer";
+import BooleanRow from "../components/BooleanRow";
+import FlowRow from "../components/FlowRow";
 import Node from "../components/Node";
 import TextRow from "../components/TextRow";
 
-export default function FlowBranchNode({ data }: NodeProps) {
+export default function FlowBranchNode({
+  data,
+}: NodeProps<{ condition: boolean }>) {
   return (
     <Node title="Flow / Branch">
-      <Input label="Value" value={data.value} />
-      <TextRow>true</TextRow>
-      <TextRow>false</TextRow>
-      <Handle
-        id="condition"
-        type="target"
-        position={Position.Left}
-        style={{ top: 41 }}
+      <FlowRow type="target" />
+      <BooleanRow
+        label="Condition"
+        value={data.condition}
+        handleId="condition"
       />
-      <Handle
-        id="true"
-        type="source"
-        position={Position.Right}
-        style={{ top: 81 }}
-      />
-      <Handle
-        id="false"
-        type="source"
-        position={Position.Right}
-        style={{ top: 121 }}
-      />
+      <TextRow label="true" handleId="true" handleType="source" />
+      <TextRow label="false" handleId="false" handleType="source" />
     </Node>
   );
 }

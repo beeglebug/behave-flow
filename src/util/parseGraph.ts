@@ -2,23 +2,8 @@ import { GraphJSON } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer";
 
 function camelize(str: string) {
-  return str
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
+  return str.replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
 }
-
-/*
-{
-  type: "event/start",
-},
-{
-  type: "action/log",
-  inputs: {
-    flow: { links: [{ node: 0, socket: "flow" }] },
-    text: { value: "Hello World!" },
-  },
-}
-*/
 
 export const parseGraph = (graph: GraphJSON): [Node[], Edge[]] => {
   const nodes: Node[] = [];
@@ -31,24 +16,25 @@ export const parseGraph = (graph: GraphJSON): [Node[], Edge[]] => {
       id: String(ix),
       type: camelize(nodeJSON.type.replace("/", " ")),
       position: { x, y: 0 },
-      data: {},
+      data: {} as { [key: string]: any },
     };
 
     nodes.push(node);
 
     if (nodeJSON.inputs) {
-      for (const input of Object.values(nodeJSON.inputs)) {
+      for (const [inputKey, input] of Object.entries(nodeJSON.inputs)) {
         if (input.links !== undefined) {
           input.links.forEach((link) => {
             const source = String(link.node);
             const target = String(ix);
             const id = `e${source}-${target}`;
             const sourceHandle = link.socket;
-            edges.push({ id, source, sourceHandle, target });
+            const targetHandle = inputKey;
+            edges.push({ id, source, sourceHandle, target, targetHandle });
           });
         }
         if (input.value !== undefined) {
-          node.data = input;
+          node.data[inputKey] = input.value;
         }
       }
     }

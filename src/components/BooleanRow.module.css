@@ -2,12 +2,17 @@
   margin: 0;
   border-radius: 0;
   border: 0;
+  display: block;
   width: 100%;
   box-sizing: border-box;
-  background: #4c525f;
+  background-color: #4c525f;
   color: #fff;
   font-size: 12px;
-  padding: 3px;
+  padding: 3px 5px;
+}
+
+.input:disabled {
+  background-color: #32363e;
 }
 
 .row {

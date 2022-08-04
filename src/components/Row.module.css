@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+
+.left {
+  justify-content: start;
+}
+
+.right {
+  justify-content: end;
+}
