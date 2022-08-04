@@ -5,13 +5,3 @@
   font-size: 12px;
   min-width: 150px;
 }
-
-.header {
-  height: 20px;
-  padding: 0 0 0 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #B8350A;
-
-}

@@ -14,80 +14,10 @@ import ReactFlow, {
 import { parseGraph } from "./util/parseGraph";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/BehaveControls";
+import { exec } from "./util/exec";
+import rawGraphJSON from "./graph.json";
 
-const graphJSON: GraphJSON = [
-  {
-    type: "event/start",
-  },
-  {
-    type: "logic/numberConstant",
-    inputs: {
-      a: { value: 3 },
-    },
-  },
-  {
-    type: "logic/numberPow",
-    inputs: {
-      a: { links: [{ node: 1, socket: "result" }] },
-      b: { value: 1 },
-    },
-  },
-  {
-    type: "logic/numberPow",
-    inputs: {
-      a: { links: [{ node: 1, socket: "result" }] },
-      b: { value: 2 },
-    },
-  },
-  {
-    type: "logic/numberPow",
-    inputs: {
-      a: { links: [{ node: 1, socket: "result" }] },
-      b: { value: 3 },
-    },
-  },
-  {
-    type: "logic/numberMultiply",
-    inputs: {
-      a: { links: [{ node: 2, socket: "result" }] },
-      b: { value: 3 },
-    },
-  },
-  {
-    type: "logic/numberAdd",
-    inputs: {
-      a: { links: [{ node: 5, socket: "result" }] },
-      b: { links: [{ node: 3, socket: "result" }] },
-    },
-  },
-  {
-    type: "logic/numberNegate",
-    inputs: {
-      a: { links: [{ node: 4, socket: "result" }] },
-      b: { value: 10 },
-    },
-  },
-  {
-    type: "logic/numberAdd",
-    inputs: {
-      a: { links: [{ node: 6, socket: "result" }] },
-      b: { links: [{ node: 7, socket: "result" }] },
-    },
-  },
-  {
-    type: "logic/numberToString",
-    inputs: {
-      a: { links: [{ node: 8, socket: "result" }] },
-    },
-  },
-  {
-    type: "action/log",
-    inputs: {
-      flow: { links: [{ node: 0, socket: "flow" }] },
-      text: { links: [{ node: 9, socket: "result" }] },
-    },
-  },
-];
+const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = parseGraph(graphJSON);
 
@@ -130,7 +60,7 @@ function Flow() {
         color="#353639"
         style={{ backgroundColor: "#1E1F22" }}
       />
-      <BehaveControls />
+      <BehaveControls onRun={() => exec(graphJSON)} />
     </ReactFlow>
   );
 }

@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import styles from "./Node.module.css";
 
 type NodeProps = {
   title: string;
@@ -10,9 +9,9 @@ export default function Node({
   children,
 }: PropsWithChildren<NodeProps>) {
   return (
-    <div className={styles.node}>
-      <div className={styles.header}>{title}</div>
-      <div className={styles.body}>{children}</div>
+    <div className="border border-orange-700 text-white text-sm bg-gray-800">
+      <div className="bg-orange-700 px-2 py-1">{title}</div>
+      <div>{children}</div>
     </div>
   );
 }

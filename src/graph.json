@@ -1,0 +1,51 @@
+[
+  {
+    "type": "event/start"
+  },
+  {
+    "type": "logic/numberConstant",
+    "inputs": {
+      "a": { "value": 3 }
+    }
+  },
+  {
+    "type": "logic/numberConstant",
+    "inputs": {
+      "a": { "value": 2 }
+    }
+  },
+  {
+    "type": "logic/numberMultiply",
+    "inputs": {
+      "a": { "links": [{ "node": 1, "socket": "result" }] },
+      "b": { "value": 2 }
+    }
+  },
+  {
+    "type": "logic/numberAdd",
+    "inputs": {
+      "a": { "links": [{ "node": 1, "socket": "result" }] },
+      "b": { "links": [{ "node": 2, "socket": "result" }] }
+    }
+  },
+  {
+    "type": "logic/numberAdd",
+    "inputs": {
+      "a": { "links": [{ "node": 3, "socket": "result" }] },
+      "b": { "links": [{ "node": 4, "socket": "result" }] }
+    }
+  },
+  {
+    "type": "logic/numberToString",
+    "inputs": {
+      "a": { "links": [{ "node": 5, "socket": "result" }] }
+    }
+  },
+  {
+    "type": "action/log",
+    "inputs": {
+      "flow": { "links": [{ "node": 0, "socket": "flow" }] },
+      "text": { "links": [{ "node": 6, "socket": "result" }] }
+    }
+  }
+]
