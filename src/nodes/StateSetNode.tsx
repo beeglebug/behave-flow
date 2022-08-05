@@ -8,8 +8,18 @@ export default function StateSetNode({ data }: NodeProps) {
     <Node title="State / Set">
       <FlowRow target />
       <FlowRow source />
-      <InputRow label="ID" value={data.identifier} handleId="identifier" />
-      <InputRow label="Value" value={data.value} handleId="result" />
+      <InputRow
+        label="ID"
+        value={data.identifier}
+        handleId="identifier"
+        onChange={() => {}}
+      />
+      <InputRow
+        label="Value"
+        value={data.value}
+        handleId="result"
+        onChange={() => {}}
+      />
     </Node>
   );
 }

@@ -9,6 +9,7 @@ import StateGetNode from "../nodes/StateGetNode";
 
 import UnaryOperationNode from "../nodes/UnaryOperationNode";
 import TimeDelayNode from "../nodes/TimeDelayNode";
+import { NodeCategory } from "../types";
 
 export const customNodeTypes: NodeTypes = {
   "action/log": ActionLogNode,
@@ -16,23 +17,55 @@ export const customNodeTypes: NodeTypes = {
   "flow/branch": FlowBranchNode,
   "time/delay": TimeDelayNode,
   "logic/numberToString": (props) => (
-    <UnaryOperationNode title="Logic / Number To String" {...props} />
+    <UnaryOperationNode
+      title="Number To String"
+      category={NodeCategory.Logic}
+      {...props}
+    />
   ),
   "state/setNumber": StateSetNode,
   "state/getNumber": StateGetNode,
   "logic/numberConstant": (props) => (
-    <SingleInputNode title="Logic / Number Constant" {...props} />
+    <SingleInputNode
+      title="Number Constant"
+      inputType="number"
+      category={NodeCategory.Logic}
+      {...props}
+    />
+  ),
+  "logic/stringConcat": (props) => (
+    <BinaryOperationNode
+      title="String Concat"
+      category={NodeCategory.Logic}
+      {...props}
+    />
   ),
   "logic/numberAdd": (props) => (
-    <BinaryOperationNode title="Logic / Number Add" {...props} />
+    <BinaryOperationNode
+      title="Logic / Number Add"
+      category={NodeCategory.Logic}
+      {...props}
+    />
   ),
   "logic/numberMultiply": (props) => (
-    <BinaryOperationNode title="Logic / Number Multiply" {...props} />
+    <BinaryOperationNode
+      title="Logic / Number Multiply"
+      category={NodeCategory.Logic}
+      {...props}
+    />
   ),
   "logic/numberPow": (props) => (
-    <BinaryOperationNode title="Logic / Number Pow" {...props} />
+    <BinaryOperationNode
+      title="Logic / Number Pow"
+      category={NodeCategory.Logic}
+      {...props}
+    />
   ),
   "logic/numberNegate": (props) => (
-    <UnaryOperationNode title="Logic / Number Negate" {...props} />
+    <UnaryOperationNode
+      title="Negate"
+      category={NodeCategory.Logic}
+      {...props}
+    />
   ),
 };

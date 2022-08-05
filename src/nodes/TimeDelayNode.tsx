@@ -7,7 +7,12 @@ export default function TimeDelayNode({ data }: NodeProps) {
   return (
     <Node title="Time / Delay">
       <FlowRow source target />
-      <InputRow label="Duration" value={data.duration} handleId="duration" />
+      <InputRow
+        label="Duration"
+        value={data.duration}
+        handleId="duration"
+        onChange={() => {}}
+      />
     </Node>
   );
 }

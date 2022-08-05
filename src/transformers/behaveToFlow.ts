@@ -1,17 +1,19 @@
 import { GraphJSON } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer";
+import { v4 as uuidv4 } from "uuid";
 
 export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  let x = 0;
-
-  graph.forEach((nodeJSON, ix) => {
-    const node = {
-      id: String(ix),
+  graph.nodes.forEach((nodeJSON) => {
+    const node: Node = {
+      id: nodeJSON.id,
       type: nodeJSON.type,
-      position: { x, y: 0 },
+      position: {
+        x: Number(nodeJSON.metadata?.positionX) ?? 0,
+        y: Number(nodeJSON.metadata?.positionY) ?? 0,
+      },
       data: {} as { [key: string]: any },
     };
 
@@ -21,12 +23,13 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
       for (const [inputKey, input] of Object.entries(nodeJSON.inputs)) {
         if (input.links !== undefined) {
           input.links.forEach((link) => {
-            const source = String(link.node);
-            const target = String(ix);
-            const id = `e${source}-${target}`;
-            const sourceHandle = link.socket;
-            const targetHandle = inputKey;
-            edges.push({ id, source, sourceHandle, target, targetHandle });
+            edges.push({
+              id: uuidv4(),
+              source: link.nodeId,
+              sourceHandle: link.socket,
+              target: nodeJSON.id,
+              targetHandle: inputKey,
+            });
           });
         }
         if (input.value !== undefined) {
@@ -34,9 +37,6 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
         }
       }
     }
-
-    // TODO better auto positioning
-    x += 250;
   });
 
   return [nodes, edges];

@@ -1,26 +1,137 @@
-[
-  {
-    "type": "event/start"
-  },
-  {
-    "type": "action/log",
-    "inputs": {
-      "flow": { "links": [{ "node": 0, "socket": "flow" }] },
-      "text": { "value": "Waiting..." }
+{
+  "nodes": [
+    {
+      "id": "53e89ea9-7f94-49aa-a0e2-44ece6921acf",
+      "type": "logic/numberConstant",
+      "metadata": {
+        "positionX": "4.006976744186048",
+        "positionY": "189.67848837209308"
+      },
+      "inputs": {
+        "a": {
+          "value": "3"
+        }
+      }
+    },
+    {
+      "id": "0",
+      "type": "logic/numberToString",
+      "metadata": {
+        "positionX": "350.6209302325582",
+        "positionY": "227.37500000000003"
+      },
+      "inputs": {
+        "a": {
+          "links": [
+            {
+              "nodeId": "53e89ea9-7f94-49aa-a0e2-44ece6921acf",
+              "socket": "result"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "2",
+      "type": "logic/stringConcat",
+      "metadata": {
+        "positionX": "638.4238372093024",
+        "positionY": "225.3697674418605"
+      },
+      "inputs": {
+        "b": {
+          "value": " seconds later"
+        },
+        "a": {
+          "links": [
+            {
+              "nodeId": "0",
+              "socket": "result"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "3",
+      "type": "event/start",
+      "metadata": {
+        "positionX": "-106.4441860465117",
+        "positionY": "-67.15523255813956"
+      }
+    },
+    {
+      "id": "4",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "141.49127906976727",
+        "positionY": "-12.020930232558136"
+      },
+      "inputs": {
+        "text": {
+          "value": "Waiting..."
+        },
+        "flow": {
+          "links": [
+            {
+              "nodeId": "3",
+              "socket": "flow"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "5",
+      "type": "time/delay",
+      "metadata": {
+        "positionX": "452.6081395348837",
+        "positionY": "54.041860465116315"
+      },
+      "inputs": {
+        "duration": {
+          "links": [
+            {
+              "nodeId": "53e89ea9-7f94-49aa-a0e2-44ece6921acf",
+              "socket": "result"
+            }
+          ]
+        },
+        "flow": {
+          "links": [
+            {
+              "nodeId": "4",
+              "socket": "flow"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "6",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "970.3197674418604",
+        "positionY": "157.00348837209302"
+      },
+      "inputs": {
+        "text": {
+          "links": [
+            {
+              "nodeId": "2",
+              "socket": "result"
+            }
+          ]
+        },
+        "flow": {
+          "links": [
+            {
+              "nodeId": "5",
+              "socket": "flow"
+            }
+          ]
+        }
+      }
     }
-  },
-  {
-    "type": "time/delay",
-    "inputs": {
-      "flow": { "links": [{ "node": 1, "socket": "flow" }] },
-      "duration": { "value": 1 }
-    }
-  },
-  {
-    "type": "action/log",
-    "inputs": {
-      "flow": { "links": [{ "node": 2, "socket": "flow" }] },
-      "text": { "value": "One Second Later!" }
-    }
-  }
-]
+  ]
+}

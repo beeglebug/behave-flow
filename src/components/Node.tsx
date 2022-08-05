@@ -1,29 +1,40 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
+import { NodeCategory } from "../types";
 
 type NodeProps = {
   title: string;
+  category?: NodeCategory;
 };
 
-const randomItem = (items: any[]) =>
-  items[Math.floor(Math.random() * items.length)];
-
-const colors = {
+const colors: Record<string, [string, string, string]> = {
   red: ["bg-orange-700", "border-orange-700", "text-white"],
-  yellow: ["bg-amber-600", "border-amber-600", "text-white"],
   green: ["bg-green-600", "border-green-600", "text-white"],
-  pink: ["bg-pink-500", "border-pink-500", "text-white"],
+  purple: ["bg-purple-500", "border-purple-500", "text-white"],
+  blue: ["bg-cyan-600", "border-cyan-600", "text-white"],
   gray: ["bg-gray-500", "border-gray-500", "text-white"],
+};
+
+const categoryColorMap: Record<NodeCategory, string> = {
+  [NodeCategory.Event]: "red",
+  [NodeCategory.Logic]: "green",
+  [NodeCategory.State]: "purple",
+  [NodeCategory.Query]: "purple",
+  [NodeCategory.Action]: "blue",
+  [NodeCategory.Flow]: "gray",
+  [NodeCategory.Time]: "gray",
+  [NodeCategory.None]: "gray",
 };
 
 export default function Node({
   title,
+  category = NodeCategory.None,
   children,
 }: PropsWithChildren<NodeProps>) {
-  const [color] = useState(() => randomItem(Object.values(colors)));
-  const [backgroundColor, borderColor, textColor] = color;
+  const colorName = categoryColorMap[category];
+  const [backgroundColor, borderColor, textColor] = colors[colorName];
   return (
     <div
-      className={`border ${borderColor} text-white text-sm bg-gray-800 min-w-[150px]`}
+      className={`border ${borderColor} rounded text-white text-sm bg-gray-800 min-w-[150px]`}
     >
       <div className={`${backgroundColor} ${textColor} px-2 py-1`}>{title}</div>
       <div>{children}</div>

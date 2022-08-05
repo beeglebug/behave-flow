@@ -1,15 +1,14 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
   addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
   Background,
   BackgroundVariant,
   Connection,
   Controls,
-  EdgeChange,
-  NodeChange,
+  useEdgesState,
+  useNodesState,
 } from "react-flow-renderer";
+import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/BehaveControls";
@@ -22,28 +21,9 @@ const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = behaveToFlow(graphJSON);
 
-const output = flowToBehave(initialNodes, initialEdges);
-
-console.log(graphJSON, output, initialNodes, initialEdges);
-
 function Flow() {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
-
-  const onNodesChange = useCallback(
-    (changes: NodeChange[]) => {
-      setNodes((nds) => applyNodeChanges(changes, nds));
-      // TODO update the behave graph
-    },
-    [setNodes]
-  );
-  const onEdgesChange = useCallback(
-    (changes: EdgeChange[]) => {
-      setEdges((eds) => applyEdgeChanges(changes, eds));
-      // TODO update the behave graph
-    },
-    [setEdges]
-  );
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
     (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
@@ -51,12 +31,11 @@ function Flow() {
   );
 
   const handleAddNode = (nodeType: string) => {
-    const nextId = Math.random().toString();
     onNodesChange([
       {
         type: "add",
         item: {
-          id: nextId,
+          id: uuidv4(),
           type: nodeType,
           position: { x: 0, y: -200 },
           data: {},

@@ -13,13 +13,14 @@
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "behave-graph": "0.0.3",
+    "behave-graph": "0.0.4",
     "classnames": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flow-renderer": "^10.3.12",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.7"
