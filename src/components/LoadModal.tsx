@@ -1,6 +1,6 @@
 import { GraphJSON } from "behave-graph";
 import { FC, useState } from "react";
-import { getRectOfNodes, useReactFlow } from "react-flow-renderer";
+import { useReactFlow } from "react-flow-renderer";
 import { useOnPressKey } from "../hooks/useOnPressKey";
 import { behaveToFlow } from "../transformers/behaveToFlow";
 import { autoLayout } from "../util/autoLayout";
