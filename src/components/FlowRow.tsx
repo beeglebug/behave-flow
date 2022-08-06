@@ -1,11 +1,20 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Handle, Position } from "react-flow-renderer";
+import CaretRightSolid from "../icons/CaretRightSolid";
 import { Row } from "./Row";
 
-export type FlowRowProps = { target?: boolean; source?: boolean };
+export type FlowRowProps = {
+  target?: boolean;
+  source?: boolean;
+  targetConnected?: boolean;
+};
 
-export default function FlowRow({ target, source }: FlowRowProps) {
+export default function FlowRow({
+  target,
+  source,
+  targetConnected = true,
+}: FlowRowProps) {
   return (
     <Row align="center">
       {target && (

@@ -34,7 +34,7 @@ export default function Node({
   const [backgroundColor, borderColor, textColor] = colors[colorName];
   return (
     <div
-      className={`border ${borderColor} rounded text-white text-sm bg-gray-800 min-w-[150px]`}
+      className={`border ${borderColor} rounded text-white text-sm bg-gray-800 min-w-[120px]`}
     >
       <div className={`${backgroundColor} ${textColor} px-2 py-1`}>{title}</div>
       <div>{children}</div>

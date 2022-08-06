@@ -11,7 +11,11 @@ export default function ActionLogNode({ id, data }: NodeProps) {
   const handleChange = useChangeNodeData(id);
   return (
     <Node title="Log" category={NodeCategory.Action}>
-      <FlowRow target source />
+      <FlowRow
+        target
+        source
+        targetConnected={isHandleConnected(edges, id, "flow")}
+      />
       <InputRow
         label="Text"
         value={data.text}

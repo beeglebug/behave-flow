@@ -23,13 +23,15 @@ export default function InputRow({
   return (
     <Row>
       {label && <label className="mr-2">{label}</label>}
-      <input
-        type={type === "string" ? "text" : "number"}
-        disabled={connected}
-        className=" bg-gray-600 disabled:bg-gray-700  py-1 px-2"
-        value={connected ? "" : value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      {connected === false && (
+        <input
+          type={type === "string" ? "text" : "number"}
+          className=" bg-gray-600 disabled:bg-gray-700 w-full py-1 px-2"
+          value={connected ? "" : value ?? ""}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      )}
+      {label === undefined && connected === true && <div className="h-7"></div>}
       <Handle
         id={handleId}
         type={handleType}
