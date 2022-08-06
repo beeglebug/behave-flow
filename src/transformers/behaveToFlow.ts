@@ -11,8 +11,12 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
       id: nodeJSON.id,
       type: nodeJSON.type,
       position: {
-        x: Number(nodeJSON.metadata?.positionX) ?? 0,
-        y: Number(nodeJSON.metadata?.positionY) ?? 0,
+        x: nodeJSON.metadata?.positionX
+          ? Number(nodeJSON.metadata?.positionX)
+          : 0,
+        y: nodeJSON.metadata?.positionY
+          ? Number(nodeJSON.metadata?.positionY)
+          : 0,
       },
       data: {} as { [key: string]: any },
     };

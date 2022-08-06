@@ -1,21 +1,25 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Handle, Position } from "react-flow-renderer";
-import { OutputSocket as Socket } from "../types";
+import { OutputSocketSpecJSON } from "../types";
 
 export type OutputSocketProps = {
   connected: boolean;
-} & Socket;
+} & OutputSocketSpecJSON;
 
 export default function OutputSocket({
   connected,
   valueType,
   name,
 }: OutputSocketProps) {
+  const showFlowIcon = valueType === "flow";
   return (
-    <div className="flex w-full items-center relative pr-2 h-7 my-2">
-      <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
-      <Handle id="flow" type="source" position={Position.Right} />
+    <div className="flex grow items-center justify-end h-7">
+      {showFlowIcon && (
+        <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
+      )}
+      {showFlowIcon === false && <div className="capitalize">{name}</div>}
+      <Handle id={name} type="source" position={Position.Right} />
     </div>
   );
 }

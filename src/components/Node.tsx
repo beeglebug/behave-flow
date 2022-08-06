@@ -1,43 +1,58 @@
-import { PropsWithChildren } from "react";
-import { NodeCategory } from "../types";
+import { NodeProps as FlowNodeProps, useEdges } from "react-flow-renderer";
+import InputSocket from "./InputSocket";
+import NodeContainer from "./NodeContainer";
+import OutputSocket from "./OutputSocket";
+import { useChangeNodeData } from "../hooks/useChangeNodeData";
+import { NodeSpecJSON } from "../types";
+import { isHandleConnected } from "../util/isHandleConnected";
 
-type NodeProps = {
-  title: string;
-  category?: NodeCategory;
+type NodeProps = FlowNodeProps & {
+  spec: NodeSpecJSON;
 };
 
-const colors: Record<string, [string, string, string]> = {
-  red: ["bg-orange-700", "border-orange-700", "text-white"],
-  green: ["bg-green-600", "border-green-600", "text-white"],
-  purple: ["bg-purple-500", "border-purple-500", "text-white"],
-  blue: ["bg-cyan-600", "border-cyan-600", "text-white"],
-  gray: ["bg-gray-500", "border-gray-500", "text-white"],
+const getTitle = (type: string) => {
+  const end = type.substring(type.lastIndexOf("/") + 1);
+  const spaces = end.replace(/([A-Z])/g, " $1");
+  return spaces.charAt(0).toUpperCase() + spaces.slice(1);
 };
 
-const categoryColorMap: Record<NodeCategory, string> = {
-  Event: "red",
-  Logic: "green",
-  State: "purple",
-  Query: "purple",
-  Action: "blue",
-  Flow: "gray",
-  Time: "gray",
-  None: "gray",
+const getPairs = <T, U>(arr1: T[], arr2: U[]) => {
+  const max = Math.max(arr1.length, arr2.length);
+  const pairs = [];
+  for (let i = 0; i < max; i++) {
+    const pair: [T | undefined, U | undefined] = [arr1[i], arr2[i]];
+    pairs.push(pair);
+  }
+  return pairs;
 };
 
-export default function Node({
-  title,
-  category = "None",
-  children,
-}: PropsWithChildren<NodeProps>) {
-  const colorName = categoryColorMap[category];
-  const [backgroundColor, borderColor, textColor] = colors[colorName];
+export const Node = ({ id, data, spec }: NodeProps) => {
+  const edges = useEdges();
+  const handleChange = useChangeNodeData(id);
+  const pairs = getPairs(spec.inputs, spec.outputs);
   return (
-    <div
-      className={`border ${borderColor} rounded text-white text-sm bg-gray-800 min-w-[120px]`}
-    >
-      <div className={`${backgroundColor} ${textColor} px-2 py-1`}>{title}</div>
-      <div>{children}</div>
-    </div>
+    <NodeContainer title={getTitle(spec.type)} category={spec.category}>
+      {pairs.map(([input, output], ix) => (
+        <div
+          key={ix}
+          className="flex flex-row justify-between gap-8 relative px-2 my-2"
+        >
+          {input && (
+            <InputSocket
+              {...input}
+              value={data[input.name] ?? input.defaultValue}
+              onChange={handleChange}
+              connected={isHandleConnected(edges, id, input.name)}
+            />
+          )}
+          {output && (
+            <OutputSocket
+              {...output}
+              connected={isHandleConnected(edges, id, output.name)}
+            />
+          )}
+        </div>
+      ))}
+    </NodeContainer>
   );
-}
+};

@@ -1,4 +1,4 @@
-// TODO export from behave-graph
+// TODO get all these from behave-graph once merged
 
 export type NodeCategory =
   | "Action"
@@ -10,40 +10,20 @@ export type NodeCategory =
   | "Time"
   | "None";
 
-type FlowSocket = { name: string; valueType: "flow"; defaultValue: undefined };
-
-type OutputNumberSocket = {
+export type InputSocketSpecJSON = {
   name: string;
-  valueType: "number";
-};
-type OutputStringSocket = {
-  name: string;
-  valueType: "string";
-};
-type OutputBooleanSocket = {
-  name: string;
-  valueType: "boolean";
+  valueType: "flow" | "string" | "number" | "boolean";
+  defaultValue?: string | number | boolean;
 };
 
-type InputNumberSocket = OutputNumberSocket & { defaultValue: number };
-type InputStringSocket = OutputStringSocket & { defaultValue: string };
-type InputBooleanSocket = OutputBooleanSocket & { defaultValue: boolean };
+export type OutputSocketSpecJSON = {
+  name: string;
+  valueType: "flow" | "string" | "number" | "boolean";
+};
 
-export type InputSocket =
-  | FlowSocket
-  | InputNumberSocket
-  | InputStringSocket
-  | InputBooleanSocket;
-
-export type OutputSocket =
-  | FlowSocket
-  | OutputNumberSocket
-  | OutputStringSocket
-  | OutputBooleanSocket;
-
-export type NodeSpec = {
+export type NodeSpecJSON = {
   type: string;
   category: NodeCategory;
-  inputs: InputSocket[];
-  outputs: OutputSocket[];
+  inputs: InputSocketSpecJSON[];
+  outputs: OutputSocketSpecJSON[];
 };
