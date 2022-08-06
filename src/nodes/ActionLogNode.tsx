@@ -10,7 +10,7 @@ export default function ActionLogNode({ id, data }: NodeProps) {
   const edges = useEdges();
   const handleChange = useChangeNodeData(id);
   return (
-    <Node title="Log" category={NodeCategory.Action}>
+    <Node title="Log" category={"Action"}>
       <FlowRow
         target
         source

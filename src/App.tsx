@@ -16,10 +16,15 @@ import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
 import { flowToBehave } from "./transformers/flowToBehave";
+import CustomEdge from "./components/CustomEdge";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = behaveToFlow(graphJSON);
+
+const edgeTypes = {
+  default: CustomEdge,
+};
 
 function Flow() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
@@ -52,6 +57,7 @@ function Flow() {
   return (
     <ReactFlow
       nodeTypes={customNodeTypes}
+      edgeTypes={edgeTypes}
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}

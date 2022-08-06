@@ -15,19 +15,19 @@ const colors: Record<string, [string, string, string]> = {
 };
 
 const categoryColorMap: Record<NodeCategory, string> = {
-  [NodeCategory.Event]: "red",
-  [NodeCategory.Logic]: "green",
-  [NodeCategory.State]: "purple",
-  [NodeCategory.Query]: "purple",
-  [NodeCategory.Action]: "blue",
-  [NodeCategory.Flow]: "gray",
-  [NodeCategory.Time]: "gray",
-  [NodeCategory.None]: "gray",
+  Event: "red",
+  Logic: "green",
+  State: "purple",
+  Query: "purple",
+  Action: "blue",
+  Flow: "gray",
+  Time: "gray",
+  None: "gray",
 };
 
 export default function Node({
   title,
-  category = NodeCategory.None,
+  category = "None",
   children,
 }: PropsWithChildren<NodeProps>) {
   const colorName = categoryColorMap[category];

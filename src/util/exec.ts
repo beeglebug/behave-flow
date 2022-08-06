@@ -1,14 +1,14 @@
 import {
   GraphEvaluator,
   GraphJSON,
-  GraphTypeRegistry,
+  GraphRegistry,
   readGraphFromJSON,
   registerGenericNodes,
 } from "behave-graph";
 
-const registry = new GraphTypeRegistry();
+const registry = new GraphRegistry();
 
-registerGenericNodes(registry);
+registerGenericNodes(registry.nodes);
 
 export const exec = async (graphJson: GraphJSON) => {
   const graph = readGraphFromJSON(graphJson, registry);

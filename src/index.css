@@ -34,3 +34,9 @@ select {
 .react-flow__handle-left {
   left: -6px;
 }
+
+.react-flow__edge-path {
+  stroke: #b1b1b7;
+  stroke-width: 2;
+  cursor: pointer;
+}

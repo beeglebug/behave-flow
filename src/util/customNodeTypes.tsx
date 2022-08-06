@@ -9,17 +9,22 @@ import StateGetNode from "../nodes/StateGetNode";
 
 import UnaryOperationNode from "../nodes/UnaryOperationNode";
 import TimeDelayNode from "../nodes/TimeDelayNode";
-import { NodeCategory } from "../types";
+import { NodeCategory, NodeSpec } from "../types";
+import GenericNode from "../nodes/GenericNode";
+
+import specRaw from "../spec.json";
+
+const spec = specRaw as unknown as NodeSpec[];
 
 export const customNodeTypes: NodeTypes = {
-  "action/log": ActionLogNode,
-  "event/start": EventStartNode,
+  "action/log": (props) => <GenericNode spec={spec[0]} {...props} />,
+  "event/start": (props) => <GenericNode spec={spec[1]} {...props} />,
   "flow/branch": FlowBranchNode,
   "time/delay": TimeDelayNode,
   "logic/numberToString": (props) => (
     <UnaryOperationNode
       title="Number To String"
-      category={NodeCategory.Logic}
+      category={"Logic"}
       {...props}
     />
   ),
@@ -29,43 +34,35 @@ export const customNodeTypes: NodeTypes = {
     <SingleInputNode
       title="Number Constant"
       inputType="number"
-      category={NodeCategory.Logic}
+      category={"Logic"}
       {...props}
     />
   ),
   "logic/stringConcat": (props) => (
-    <BinaryOperationNode
-      title="String Concat"
-      category={NodeCategory.Logic}
-      {...props}
-    />
+    <BinaryOperationNode title="String Concat" category={"Logic"} {...props} />
   ),
   "logic/numberAdd": (props) => (
     <BinaryOperationNode
       title="Logic / Number Add"
-      category={NodeCategory.Logic}
+      category={"Logic"}
       {...props}
     />
   ),
   "logic/numberMultiply": (props) => (
     <BinaryOperationNode
       title="Logic / Number Multiply"
-      category={NodeCategory.Logic}
+      category={"Logic"}
       {...props}
     />
   ),
   "logic/numberPow": (props) => (
     <BinaryOperationNode
       title="Logic / Number Pow"
-      category={NodeCategory.Logic}
+      category={"Logic"}
       {...props}
     />
   ),
   "logic/numberNegate": (props) => (
-    <UnaryOperationNode
-      title="Negate"
-      category={NodeCategory.Logic}
-      {...props}
-    />
+    <UnaryOperationNode title="Negate" category={"Logic"} {...props} />
   ),
 };

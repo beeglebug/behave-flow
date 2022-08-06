@@ -25,7 +25,7 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
       if (behaveNode.inputs === undefined) {
         behaveNode.inputs = {};
       }
-      behaveNode.inputs[key] = { value: value as string | number | boolean };
+      behaveNode.inputs[key] = { value: value as string };
     });
 
     edges
