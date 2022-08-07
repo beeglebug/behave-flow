@@ -5,16 +5,16 @@ import { InputSocketSpecJSON } from "../types";
 
 export type InputSocketProps = {
   connected: boolean;
-  value: string | boolean | number | undefined;
+  value: any | undefined;
   onChange: (key: string, value: any) => void;
 } & InputSocketSpecJSON;
 
 export default function InputSocket({
   connected,
-  valueType,
   value,
   onChange,
   name,
+  valueType,
   defaultValue,
 }: InputSocketProps) {
   const showFlowIcon = valueType === "flow";
@@ -27,17 +27,35 @@ export default function InputSocket({
         <>
           <div className="capitalize mr-2">{name}</div>
           {connected === false && (
-            <input
-              type="text"
-              size={5}
-              className=" bg-gray-600 disabled:bg-gray-700 w-full py-1 px-2"
-              value={connected ? "" : String(value) ?? ""}
-              onChange={(e) => onChange(name, e.target.value)}
-            />
+            <>
+              {valueType === "string" && (
+                <input
+                  type="text"
+                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2"
+                  value={String(value) ?? defaultValue ?? ""}
+                  onChange={(e) => onChange(name, e.target.value)}
+                />
+              )}
+              {valueType === "number" && (
+                <input
+                  type="number"
+                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2"
+                  value={String(value) ?? defaultValue ?? ""}
+                  onChange={(e) => onChange(name, e.target.value)}
+                />
+              )}
+              {valueType === "boolean" && (
+                <input
+                  type="checkbox"
+                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2"
+                  value={String(value) ?? defaultValue ?? ""}
+                  onChange={(e) => onChange(name, e.target.value)}
+                />
+              )}
+            </>
           )}
         </>
       )}
-
       <Handle id={name} type="target" position={Position.Left} />
     </div>
   );
