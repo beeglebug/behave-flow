@@ -17,7 +17,7 @@ import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
 import { flowToBehave } from "./transformers/flowToBehave";
 import CustomEdge from "./components/CustomEdge";
-import NodePicker from "./components/NodePicker";
+// import NodePicker from "./components/NodePicker";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 

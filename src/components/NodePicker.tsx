@@ -8,10 +8,10 @@ const nodes = Object.keys(customNodeTypes).map((node) => {
 
 const NodePicker = () => {
   const [search, setSearch] = useState("");
-  const filtered = nodes.filter((node) => node.name.includes(search));
-  const grouped = filtered.reduce((groups, node) => {
-    return groups;
-  }, {});
+  const filtered = nodes.filter((node) => {
+    const term = search.toLowerCase();
+    return node.name.toLowerCase().includes(term);
+  });
   return (
     <div
       className="absolute bg-white z-10 text-sm"
@@ -26,7 +26,7 @@ const NodePicker = () => {
       />
       <div className="max-h-48 overflow-y-scroll">
         {filtered.map(({ type, name }) => (
-          <div key={name} className="p-2">
+          <div key={name} className="p-2 cursor-pointer border-b">
             {name}
           </div>
         ))}
