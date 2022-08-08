@@ -1,6 +1,6 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Handle, Position } from "react-flow-renderer";
+import { Connection, Handle, Position } from "react-flow-renderer";
 import cx from "classnames";
 import { OutputSocketSpecJSON } from "../types";
 import { colors, valueTypeColorMap } from "../util/colors";
@@ -17,6 +17,7 @@ export default function OutputSocket({
   const showFlowIcon = valueType === "flow";
   const colorName = valueTypeColorMap[valueType];
   const [backgroundColor, borderColor] = colors[colorName];
+
   return (
     <div className="flex grow items-center justify-end h-7">
       {showFlowIcon && (
@@ -28,6 +29,9 @@ export default function OutputSocket({
         type="source"
         position={Position.Right}
         className={cx(borderColor, connected ? backgroundColor : "bg-gray-800")}
+        isValidConnection={(connection: Connection) => {
+          return true;
+        }}
       />
     </div>
   );

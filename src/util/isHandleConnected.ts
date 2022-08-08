@@ -3,9 +3,10 @@ import { Edge } from "react-flow-renderer";
 export const isHandleConnected = (
   edges: Edge[],
   nodeId: string,
-  handleId: string
+  handleId: string,
+  type: "source" | "target"
 ) => {
   return edges.some(
-    (edge) => edge.target === nodeId && edge.targetHandle === handleId
+    (edge) => edge[type] === nodeId && edge[`${type}Handle`] === handleId
   );
 };

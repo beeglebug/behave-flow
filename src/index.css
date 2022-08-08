@@ -50,12 +50,24 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+.react-flow__edge-path {
+  stroke: #555;
+}
+
 .edge-path-bg {
-  stroke: #1E1F22;
+  stroke: transparent;
   stroke-width: 9;
   cursor: pointer;
 }
 
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #fff;
+}
+
 .react-flow__edge.selected .edge-path-bg {
-  stroke: none;
+  stroke: transparent;
+}
+
+.react-flow__node.selected .node-container {
+  border-color: white;
 }

@@ -42,13 +42,13 @@ export const Node = ({ id, data, spec }: NodeProps) => {
               {...input}
               value={data[input.name] ?? input.defaultValue}
               onChange={handleChange}
-              connected={isHandleConnected(edges, id, input.name)}
+              connected={isHandleConnected(edges, id, input.name, "target")}
             />
           )}
           {output && (
             <OutputSocket
               {...output}
-              connected={isHandleConnected(edges, id, output.name)}
+              connected={isHandleConnected(edges, id, output.name, "source")}
             />
           )}
         </div>

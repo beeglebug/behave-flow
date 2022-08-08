@@ -1,6 +1,6 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Handle, Position } from "react-flow-renderer";
+import { Connection, Handle, Position } from "react-flow-renderer";
 import cx from "classnames";
 import { InputSocketSpecJSON } from "../types";
 import { colors, valueTypeColorMap } from "../util/colors";
@@ -65,6 +65,9 @@ export default function InputSocket({
         type="target"
         position={Position.Left}
         className={cx(borderColor, connected ? backgroundColor : "bg-gray-800")}
+        isValidConnection={(connection: Connection) => {
+          return true;
+        }}
       />
     </div>
   );

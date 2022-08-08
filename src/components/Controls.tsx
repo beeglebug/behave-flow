@@ -3,14 +3,14 @@ import { customNodeTypes } from "../util/customNodeTypes";
 import { LoadModal } from "./LoadModal";
 import { SaveModal } from "./SaveModal";
 
-export type BehaveControlsProps = {
+export type ControlsProps = {
   onRun: () => void;
   onAdd: (nodeType: string) => void;
 };
 
 const nodes = Object.keys(customNodeTypes).map((key) => key);
 
-const BehaveControls: FC<BehaveControlsProps> = ({ onRun, onAdd }) => {
+const Controls: FC<ControlsProps> = ({ onRun, onAdd }) => {
   const [nodeType, setNodeType] = useState(nodes[0]);
   const [loadModalOpen, setLoadModalOpen] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
@@ -61,4 +61,4 @@ const BehaveControls: FC<BehaveControlsProps> = ({ onRun, onAdd }) => {
   );
 };
 
-export default BehaveControls;
+export default Controls;

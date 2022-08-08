@@ -11,12 +11,13 @@ import ReactFlow, {
 import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
-import BehaveControls from "./components/BehaveControls";
+import BehaveControls from "./components/Controls";
 import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
 import { flowToBehave } from "./transformers/flowToBehave";
 import CustomEdge from "./components/CustomEdge";
+import NodePicker from "./components/NodePicker";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 
@@ -49,6 +50,13 @@ function Flow() {
     ]);
   };
 
+  const handleStopConnect = (e: MouseEvent) => {
+    const element = e.target as HTMLElement;
+    if (element.classList.contains("react-flow__pane")) {
+      console.log("create", e);
+    }
+  };
+
   const handleRun = () => {
     const graph = flowToBehave(nodes, edges);
     exec(graph);
@@ -63,6 +71,7 @@ function Flow() {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
+      onConnectStop={handleStopConnect}
       fitView
       fitViewOptions={{ maxZoom: 1 }}
     >
@@ -73,6 +82,7 @@ function Flow() {
         style={{ backgroundColor: "#1E1F22" }}
       />
       <BehaveControls onRun={handleRun} onAdd={handleAddNode} />
+      {/* <NodePicker /> */}
     </ReactFlow>
   );
 }
