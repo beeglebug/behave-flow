@@ -1,9 +1,9 @@
 import { NodeProps as FlowNodeProps, useEdges } from "react-flow-renderer";
+import { NodeSpecJSON } from "behave-graph";
 import InputSocket from "./InputSocket";
 import NodeContainer from "./NodeContainer";
 import OutputSocket from "./OutputSocket";
 import { useChangeNodeData } from "../hooks/useChangeNodeData";
-import { NodeSpecJSON } from "../types";
 import { isHandleConnected } from "../util/isHandleConnected";
 
 type NodeProps = FlowNodeProps & {

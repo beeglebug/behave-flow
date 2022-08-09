@@ -1,4 +1,4 @@
-import { NodeCategory } from "../types";
+import { NodeSpecJSON } from "behave-graph";
 
 export const colors: Record<string, [string, string, string]> = {
   red: ["bg-orange-700", "border-orange-700", "text-white"],
@@ -16,7 +16,7 @@ export const valueTypeColorMap: Record<string, string> = {
   string: "purple",
 };
 
-export const categoryColorMap: Record<NodeCategory, string> = {
+export const categoryColorMap: Record<NodeSpecJSON["category"], string> = {
   Event: "red",
   Logic: "green",
   State: "purple",

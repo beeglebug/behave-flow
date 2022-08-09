@@ -1,10 +1,11 @@
+import { NodeSpecJSON } from "behave-graph";
 import { PropsWithChildren } from "react";
-import { NodeCategory } from "../types";
+
 import { categoryColorMap, colors } from "../util/colors";
 
 type NodeProps = {
   title: string;
-  category?: NodeCategory;
+  category?: NodeSpecJSON["category"];
 };
 
 export default function NodeContainer({

@@ -1,7 +1,7 @@
 import { NodeTypes } from "react-flow-renderer";
-import { NodeSpecJSON } from "../types";
-import { Node } from "../components/Node";
+import { NodeSpecJSON } from "behave-graph";
 import specJson from "behave-graph/node-spec.json";
+import { Node } from "../components/Node";
 
 const spec = specJson as NodeSpecJSON[];
 

@@ -1,13 +1,20 @@
 import { useState } from "react";
+import { useReactFlow, XYPosition } from "react-flow-renderer";
 import { customNodeTypes } from "../util/customNodeTypes";
 
-const nodes = Object.keys(customNodeTypes).map((node) => {
-  const [type, name] = node.split("/");
-  return { type, name };
+const nodes = Object.keys(customNodeTypes).map((type) => {
+  const [category, name] = type.split("/");
+  return { category, name, type };
 });
 
-const NodePicker = () => {
+type NodePickerProps = {
+  position: XYPosition;
+  onPickNode: (type: string, position: XYPosition) => void;
+};
+
+const NodePicker = ({ position, onPickNode }: NodePickerProps) => {
   const [search, setSearch] = useState("");
+  const instance = useReactFlow();
   const filtered = nodes.filter((node) => {
     const term = search.toLowerCase();
     return node.name.toLowerCase().includes(term);
@@ -15,7 +22,7 @@ const NodePicker = () => {
   return (
     <div
       className="absolute bg-white z-10 text-sm"
-      style={{ top: 100, left: 100 }}
+      style={{ top: position.y, left: position.x }}
     >
       <input
         type="text"
@@ -26,7 +33,11 @@ const NodePicker = () => {
       />
       <div className="max-h-48 overflow-y-scroll">
         {filtered.map(({ type, name }) => (
-          <div key={name} className="p-2 cursor-pointer border-b">
+          <div
+            key={name}
+            className="p-2 cursor-pointer border-b"
+            onClick={() => onPickNode(type, instance.project(position))}
+          >
             {name}
           </div>
         ))}

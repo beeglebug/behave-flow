@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import ReactFlow, {
   addEdge,
   Background,
@@ -7,6 +7,7 @@ import ReactFlow, {
   Controls,
   useEdgesState,
   useNodesState,
+  XYPosition,
 } from "react-flow-renderer";
 import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
@@ -17,7 +18,7 @@ import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
 import { flowToBehave } from "./transformers/flowToBehave";
 import CustomEdge from "./components/CustomEdge";
-// import NodePicker from "./components/NodePicker";
+import NodePicker from "./components/NodePicker";
 
 const graphJSON = rawGraphJSON as GraphJSON;
 
@@ -28,6 +29,7 @@ const edgeTypes = {
 };
 
 function Flow() {
+  const [showNodePicker, setShowNodePicker] = useState<XYPosition | null>(null);
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -36,14 +38,15 @@ function Flow() {
     [setEdges]
   );
 
-  const handleAddNode = (nodeType: string) => {
+  const handleAddNode = (nodeType: string, position: XYPosition) => {
+    setShowNodePicker(null);
     onNodesChange([
       {
         type: "add",
         item: {
           id: uuidv4(),
           type: nodeType,
-          position: { x: 0, y: -200 },
+          position,
           data: {},
         },
       },
@@ -53,7 +56,7 @@ function Flow() {
   const handleStopConnect = (e: MouseEvent) => {
     const element = e.target as HTMLElement;
     if (element.classList.contains("react-flow__pane")) {
-      console.log("create", e);
+      setShowNodePicker({ x: e.clientX, y: e.clientY });
     }
   };
 
@@ -81,8 +84,10 @@ function Flow() {
         color="#353639"
         style={{ backgroundColor: "#1E1F22" }}
       />
-      <BehaveControls onRun={handleRun} onAdd={handleAddNode} />
-      {/* <NodePicker /> */}
+      <BehaveControls onRun={handleRun} />
+      {showNodePicker && (
+        <NodePicker position={showNodePicker} onPickNode={handleAddNode} />
+      )}
     </ReactFlow>
   );
 }

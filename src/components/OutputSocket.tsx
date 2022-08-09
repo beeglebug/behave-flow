@@ -2,8 +2,8 @@ import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Connection, Handle, Position } from "react-flow-renderer";
 import cx from "classnames";
-import { OutputSocketSpecJSON } from "../types";
 import { colors, valueTypeColorMap } from "../util/colors";
+import { OutputSocketSpecJSON } from "behave-graph";
 
 export type OutputSocketProps = {
   connected: boolean;
