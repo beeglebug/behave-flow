@@ -54,7 +54,7 @@ input::-webkit-inner-spin-button {
   stroke: #555;
 }
 
-.edge-path-bg {
+.react-flow__edge .edge-path-bg {
   stroke: transparent;
   stroke-width: 9;
   cursor: pointer;
