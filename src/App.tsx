@@ -5,7 +5,6 @@ import ReactFlow, {
   BackgroundVariant,
   Connection,
   Controls,
-  Edge,
   OnConnectStartParams,
   useEdgesState,
   useNodesState,
@@ -17,13 +16,13 @@ import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/Controls";
 import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
-import { GraphJSON, NodeSpecJSON } from "behave-graph";
-import rawSpecJson from "behave-graph/node-spec.json";
+import { GraphJSON } from "behave-graph";
 import { flowToBehave } from "./transformers/flowToBehave";
 import CustomEdge from "./components/CustomEdge";
-import NodePicker, { NodePickerFilters } from "./components/NodePicker";
+import NodePicker from "./components/NodePicker";
+import { getNodePickerFilters } from "./util/getPickerFilters";
+import { calculateNewEdge } from "./util/calculateNewEdge";
 
-const specJSON = rawSpecJson as NodeSpecJSON[];
 const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = behaveToFlow(graphJSON);
@@ -35,7 +34,7 @@ const edgeTypes = {
 function Flow() {
   const [nodePickerVisibility, setNodePickerVisibility] =
     useState<XYPosition>();
-  const [lastConnectStartParams, setLastConnectStartParams] =
+  const [lastConnectStart, setLastConnectStart] =
     useState<OnConnectStartParams>();
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -45,113 +44,50 @@ function Flow() {
     [setEdges]
   );
 
-  // TODO useCallback on everything
+  const handleAddNode = useCallback(
+    (nodeType: string, position: XYPosition) => {
+      closeNodePicker();
+      const newNode = {
+        id: uuidv4(),
+        type: nodeType,
+        position,
+        data: {},
+      };
+      onNodesChange([
+        {
+          type: "add",
+          item: newNode,
+        },
+      ]);
 
-  const getSocketsByNodeTypeAndHandleType = (
-    nodeType: string | undefined,
-    handleType: "source" | "target" | null
-  ) => {
-    const spec = specJSON.find((item) => item.type === nodeType);
-    if (spec === undefined) return;
-    return handleType === "source" ? spec?.outputs : spec?.inputs;
-  };
+      if (lastConnectStart === undefined) return;
 
-  const getPickerFilters = (
-    params: OnConnectStartParams | undefined
-  ): NodePickerFilters | undefined => {
-    if (params === undefined) return;
-
-    const originNode = nodes.find((node) => node.id === params.nodeId);
-    if (originNode === undefined) return;
-
-    const sockets = getSocketsByNodeTypeAndHandleType(
-      originNode.type,
-      params.handleType
-    );
-    const socket = sockets?.find((socket) => socket.name === params.handleId);
-
-    if (socket === undefined) return;
-
-    return {
-      handleType: params.handleType === "source" ? "target" : "source",
-      valueType: socket.valueType,
-    };
-  };
-
-  const handleAddNode = (nodeType: string, position: XYPosition) => {
-    const newNode = {
-      id: uuidv4(),
-      type: nodeType,
-      position,
-      data: {},
-    };
-    onNodesChange([
-      {
-        type: "add",
-        item: newNode,
-      },
-    ]);
-    if (lastConnectStartParams !== undefined) {
+      // add an edge if we started on a socket
       const originNode = nodes.find(
-        (node) => node.id === lastConnectStartParams.nodeId
+        (node) => node.id === lastConnectStart.nodeId
       );
-      if (originNode) {
-        const sockets = getSocketsByNodeTypeAndHandleType(
-          originNode.type,
-          lastConnectStartParams.handleType
-        );
-        const originSocket = sockets?.find(
-          (socket) => socket.name === lastConnectStartParams.handleId
-        );
+      if (originNode === undefined) return;
 
-        const newSockets = getSocketsByNodeTypeAndHandleType(
-          nodeType,
-          lastConnectStartParams.handleType === "source" ? "target" : "source"
-        );
-        const newSocket = newSockets?.find(
-          (socket) => socket.valueType === originSocket?.valueType
-        );
-
-        console.log("going from", originSocket, "to", newSocket, newSockets);
-
-        // const socket = sockets?.find(
-        //   (socket) => socket.valueType === lastConnectStartParams.
-        // );
-        let newEdge: Edge;
-        if (lastConnectStartParams.handleType === "source") {
-          newEdge = {
-            id: uuidv4(),
-            source: lastConnectStartParams.nodeId ?? "",
-            sourceHandle: lastConnectStartParams.handleId,
-            target: newNode.id,
-            targetHandle: newSocket?.name,
-          };
-        } else {
-          newEdge = {
-            id: uuidv4(),
-            target: lastConnectStartParams.nodeId ?? "",
-            targetHandle: lastConnectStartParams.handleId,
-            source: newNode.id,
-            sourceHandle: newSocket?.name,
-          };
-        }
-        // console.log(newEdge);
-        onEdgesChange([
-          {
-            type: "add",
-            item: newEdge,
-          },
-        ]);
-      }
-    }
-    closeNodePicker();
-  };
+      onEdgesChange([
+        {
+          type: "add",
+          item: calculateNewEdge(
+            originNode,
+            nodeType,
+            newNode.id,
+            lastConnectStart
+          ),
+        },
+      ]);
+    },
+    [lastConnectStart, nodes, onEdgesChange, onNodesChange]
+  );
 
   const handleStartConnect = (
     e: ReactMouseEvent,
     params: OnConnectStartParams
   ) => {
-    setLastConnectStartParams(params);
+    setLastConnectStart(params);
   };
 
   const handleStopConnect = (e: MouseEvent) => {
@@ -167,7 +103,7 @@ function Flow() {
   };
 
   const closeNodePicker = () => {
-    setLastConnectStartParams(undefined);
+    setLastConnectStart(undefined);
     setNodePickerVisibility(undefined);
   };
 
@@ -204,7 +140,7 @@ function Flow() {
       {nodePickerVisibility && (
         <NodePicker
           position={nodePickerVisibility}
-          filters={getPickerFilters(lastConnectStartParams)}
+          filters={getNodePickerFilters(nodes, lastConnectStart)}
           onPickNode={handleAddNode}
           onClose={closeNodePicker}
         />
