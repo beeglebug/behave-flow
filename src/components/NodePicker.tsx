@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useReactFlow, XYPosition } from "react-flow-renderer";
+import { useReactFlow, XYPosition } from "react-flow-renderer/nocss";
 import { useOnPressKey } from "../hooks/useOnPressKey";
 import rawSpecJson from "behave-graph/node-spec.json";
 import { NodeSpecJSON } from "behave-graph";

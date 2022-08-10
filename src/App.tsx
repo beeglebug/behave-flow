@@ -10,7 +10,7 @@ import ReactFlow, {
   useEdgesState,
   useNodesState,
   XYPosition,
-} from "react-flow-renderer";
+} from "react-flow-renderer/nocss";
 import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";

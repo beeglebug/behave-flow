@@ -1,5 +1,5 @@
 import React from "react";
-import { EdgeProps, getBezierPath } from "react-flow-renderer";
+import { EdgeProps, getBezierPath } from "react-flow-renderer/nocss";
 
 export default function CustomEdge({
   id,

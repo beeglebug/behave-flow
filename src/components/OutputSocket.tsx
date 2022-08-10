@@ -5,7 +5,7 @@ import {
   Handle,
   Position,
   // useReactFlow,
-} from "react-flow-renderer";
+} from "react-flow-renderer/nocss";
 import cx from "classnames";
 import { colors, valueTypeColorMap } from "../util/colors";
 import { OutputSocketSpecJSON } from "behave-graph";

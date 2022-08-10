@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useReactFlow } from "react-flow-renderer";
+import { useReactFlow } from "react-flow-renderer/nocss";
 
 export const useChangeNodeData = (id: string) => {
   const instance = useReactFlow();

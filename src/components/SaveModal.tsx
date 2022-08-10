@@ -1,6 +1,6 @@
 import { FC, useMemo, useRef, useState } from "react";
 import { useOnPressKey } from "../hooks/useOnPressKey";
-import { useEdges, useNodes } from "react-flow-renderer";
+import { useEdges, useNodes } from "react-flow-renderer/nocss";
 import { flowToBehave } from "../transformers/flowToBehave";
 
 export type SaveModalProps = { open?: boolean; onClose: () => void };

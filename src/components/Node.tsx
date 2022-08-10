@@ -1,4 +1,7 @@
-import { NodeProps as FlowNodeProps, useEdges } from "react-flow-renderer";
+import {
+  NodeProps as FlowNodeProps,
+  useEdges,
+} from "react-flow-renderer/nocss";
 import { NodeSpecJSON } from "behave-graph";
 import InputSocket from "./InputSocket";
 import NodeContainer from "./NodeContainer";
