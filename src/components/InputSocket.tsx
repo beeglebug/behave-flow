@@ -1,9 +1,15 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Connection, Handle, Position } from "react-flow-renderer/nocss";
+import {
+  Connection,
+  Handle,
+  Position,
+  useReactFlow,
+} from "react-flow-renderer/nocss";
 import cx from "classnames";
 import { colors, valueTypeColorMap } from "../util/colors";
 import { InputSocketSpecJSON } from "behave-graph";
+import { isValidConnection } from "../util/isValidConnection";
 
 export type InputSocketProps = {
   connected: boolean;
@@ -19,6 +25,7 @@ export default function InputSocket({
   valueType,
   defaultValue,
 }: InputSocketProps) {
+  const instance = useReactFlow();
   const showFlowIcon = valueType === "flow";
   const colorName = valueTypeColorMap[valueType];
   const [backgroundColor, borderColor] = colors[colorName];
@@ -65,9 +72,9 @@ export default function InputSocket({
         type="target"
         position={Position.Left}
         className={cx(borderColor, connected ? backgroundColor : "bg-gray-800")}
-        isValidConnection={(connection: Connection) => {
-          return true;
-        }}
+        isValidConnection={(connection: Connection) =>
+          isValidConnection(connection, instance)
+        }
       />
     </div>
   );
