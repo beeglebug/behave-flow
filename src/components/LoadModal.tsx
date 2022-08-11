@@ -46,6 +46,7 @@ export const LoadModal: FC<LoadModalProps> = ({ open = false, onClose }) => {
         onClick={onClose}
       ></div>
       <div className="z-20 relative top-20 mx-auto p-2 border w-96 shadow-lg bg-white text-sm">
+        <h2 className="mb-2 text-lg">Load Graph</h2>
         <textarea
           autoFocus
           className="border border-gray-300 w-full p-2 mb-2 h-32"
@@ -53,15 +54,15 @@ export const LoadModal: FC<LoadModalProps> = ({ open = false, onClose }) => {
           value={value}
           onChange={(e) => setValue(e.currentTarget.value)}
         ></textarea>
-        <div className="flex">
+        <div className="flex flex-row gap-2">
           <button
-            className="mr-2 bg-gray-400 text-white p-2 w-full cursor-pointer hover:bg-gray-500"
+            className="bg-gray-400 text-white p-2 w-full cursor-pointer hover:bg-gray-500"
             onClick={handleClose}
           >
             Cancel
           </button>
           <button
-            className=" bg-teal-400 text-white p-2 w-full cursor-pointer hover:bg-teal-500"
+            className="bg-teal-400 text-white p-2 w-full cursor-pointer hover:bg-teal-500"
             onClick={handleLoad}
           >
             Load

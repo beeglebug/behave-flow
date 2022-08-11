@@ -41,15 +41,15 @@ export const SaveModal: FC<SaveModalProps> = ({ open = false, onClose }) => {
           className="border border-gray-300 w-full p-2 mb-2 h-32"
           defaultValue={jsonString}
         ></textarea>
-        <div className="flex">
+        <div className="flex flex-row gap-2">
           <button
-            className="mr-2 bg-gray-400 text-white p-2 w-full cursor-pointer hover:bg-gray-500"
+            className="bg-gray-400 text-white p-2 w-full cursor-pointer hover:bg-gray-500"
             onClick={onClose}
           >
             Close
           </button>
           <button
-            className=" bg-teal-400 text-white p-2 w-full cursor-pointer hover:bg-teal-500"
+            className="bg-teal-400 text-white p-2 w-full cursor-pointer hover:bg-teal-500"
             onClick={handleCopy}
           >
             {copied ? "Copied" : "Copy"}

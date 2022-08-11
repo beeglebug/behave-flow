@@ -47,21 +47,25 @@ const NodePicker = ({
 
   return (
     <div
-      className="absolute bg-white z-10 text-sm"
+      className="node-picker absolute z-10 text-sm text-white bg-gray-800 border rounded border-gray-500"
       style={{ top: position.y, left: position.x }}
     >
-      <input
-        type="text"
-        autoFocus
-        className="border w-full p-2"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="bg-gray-500 p-2">Add Node</div>
+      <div className="p-2">
+        <input
+          type="text"
+          autoFocus
+          placeholder="Type to filter"
+          className=" bg-gray-600 disabled:bg-gray-700 w-full py-1 px-2"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <div className="max-h-48 overflow-y-scroll">
         {filtered.map(({ type }) => (
           <div
             key={type}
-            className="p-2 cursor-pointer border-b"
+            className="p-2 cursor-pointer border-b border-gray-600"
             onClick={() => onPickNode(type, instance.project(position))}
           >
             {type}

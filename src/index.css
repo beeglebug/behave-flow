@@ -71,3 +71,16 @@ input::-webkit-inner-spin-button {
 .react-flow__node.selected .node-container {
   border-color: white;
 }
+
+
+.node-picker ::-webkit-scrollbar {
+  @apply w-2;
+}
+
+.node-picker ::-webkit-scrollbar-track {
+  @apply bg-gray-700;
+}
+
+.node-picker ::-webkit-scrollbar-thumb {
+  @apply bg-gray-600;
+}
