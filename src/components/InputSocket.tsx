@@ -42,7 +42,7 @@ export default function InputSocket({
               {valueType === "string" && (
                 <input
                   type="text"
-                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2"
+                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
                   onChange={(e) => onChange(name, e.target.value)}
                 />
@@ -50,7 +50,7 @@ export default function InputSocket({
               {valueType === "number" && (
                 <input
                   type="number"
-                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2"
+                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
                   onChange={(e) => onChange(name, e.target.value)}
                 />
@@ -58,7 +58,7 @@ export default function InputSocket({
               {valueType === "boolean" && (
                 <input
                   type="checkbox"
-                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2"
+                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
                   onChange={(e) => onChange(name, e.target.value)}
                 />
