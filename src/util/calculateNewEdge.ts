@@ -1,5 +1,5 @@
 import { NodeSpecJSON } from "behave-graph";
-import rawSpecJson from "behave-graph/node-spec.json";
+import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { v4 as uuidv4 } from "uuid";
 import { Node, OnConnectStartParams } from "react-flow-renderer/nocss";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";

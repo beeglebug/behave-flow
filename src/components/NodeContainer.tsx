@@ -17,10 +17,16 @@ export default function NodeContainer({
   const [backgroundColor, borderColor, textColor] = colors[colorName];
   return (
     <div
-      className={`node-container border ${borderColor} rounded text-white text-sm bg-gray-800 min-w-[120px]`}
+      className={`node-container rounded text-white text-sm bg-gray-800 min-w-[120px]`}
     >
-      <div className={`${backgroundColor} ${textColor} px-2 py-1`}>{title}</div>
-      <div>{children}</div>
+      <div className={`${backgroundColor} ${textColor} px-2 py-1 rounded-t`}>
+        {title}
+      </div>
+      <div
+        className={`flex flex-col gap-2 py-2 border-l border-r border-b ${borderColor}`}
+      >
+        {children}
+      </div>
     </div>
   );
 }

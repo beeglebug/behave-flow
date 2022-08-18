@@ -1,6 +1,6 @@
 import { Node, OnConnectStartParams } from "react-flow-renderer/nocss";
 import { NodeSpecJSON } from "behave-graph";
-import rawSpecJson from "behave-graph/node-spec.json";
+import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { NodePickerFilters } from "../components/NodePicker";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";
 

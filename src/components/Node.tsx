@@ -38,7 +38,7 @@ export const Node = ({ id, data, spec }: NodeProps) => {
       {pairs.map(([input, output], ix) => (
         <div
           key={ix}
-          className="flex flex-row justify-between gap-8 relative px-2 my-2"
+          className="flex flex-row justify-between gap-8 relative px-2"
         >
           {input && (
             <InputSocket
