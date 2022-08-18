@@ -42,6 +42,8 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
         };
       });
 
+    // TODO filter out any orphan nodes at this point, to avoid errors further down inside behave-graph
+
     graph.nodes.push(behaveNode);
   });
 

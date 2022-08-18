@@ -14,10 +14,8 @@ import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/Controls";
-import { exec } from "./util/exec";
 import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
-import { flowToBehave } from "./transformers/flowToBehave";
 import CustomEdge from "./components/CustomEdge";
 import NodePicker from "./components/NodePicker";
 import { getNodePickerFilters } from "./util/getPickerFilters";
@@ -95,11 +93,7 @@ function Flow() {
     if (element.classList.contains("react-flow__pane")) {
       setNodePickerVisibility({ x: e.clientX, y: e.clientY });
     }
-  };
-
-  const handleRun = () => {
-    const graph = flowToBehave(nodes, edges);
-    exec(graph);
+    setLastConnectStart(undefined);
   };
 
   const closeNodePicker = () => {
@@ -136,7 +130,7 @@ function Flow() {
         color="#353639"
         style={{ backgroundColor: "#1E1F22" }}
       />
-      <BehaveControls onRun={handleRun} />
+      <BehaveControls />
       {nodePickerVisibility && (
         <NodePicker
           position={nodePickerVisibility}
