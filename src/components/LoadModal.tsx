@@ -1,5 +1,5 @@
 import { GraphJSON } from "behave-graph";
-import { ChangeEvent, FC, useState } from "react";
+import { FC, useState } from "react";
 import { useReactFlow } from "react-flow-renderer/nocss";
 import { behaveToFlow } from "../transformers/behaveToFlow";
 import { autoLayout } from "../util/autoLayout";
@@ -87,7 +87,7 @@ export const LoadModal: FC<LoadModalProps> = ({ open = false, onClose }) => {
         onChange={(e) => setSelected(e.target.value)}
         value={selected}
       >
-        <option disabled hidden value="">
+        <option disabled value="">
           Select an example
         </option>
         <option value="branch">Branch</option>
