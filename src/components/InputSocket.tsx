@@ -60,7 +60,7 @@ export default function InputSocket({
                   type="checkbox"
                   className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.target.value)}
+                  onChange={(e) => onChange(name, e.target.checked)}
                 />
               )}
             </>
