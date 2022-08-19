@@ -10,6 +10,7 @@ import cx from "classnames";
 import { colors, valueTypeColorMap } from "../util/colors";
 import { InputSocketSpecJSON } from "behave-graph";
 import { isValidConnection } from "../util/isValidConnection";
+import { AutoSizeInput } from "./AutoSizeInput";
 
 export type InputSocketProps = {
   connected: boolean;
@@ -40,27 +41,27 @@ export default function InputSocket({
           {connected === false && (
             <>
               {valueType === "string" && (
-                <input
+                <AutoSizeInput
                   type="text"
-                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
+                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.target.value)}
+                  onChange={(e) => onChange(name, e.currentTarget.value)}
                 />
               )}
               {valueType === "number" && (
-                <input
+                <AutoSizeInput
                   type="number"
-                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
+                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.target.value)}
+                  onChange={(e) => onChange(name, e.currentTarget.value)}
                 />
               )}
               {valueType === "boolean" && (
                 <input
                   type="checkbox"
-                  className=" bg-gray-600 disabled:bg-gray-700 w-16 py-1 px-2 nodrag"
+                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
                   value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.target.checked)}
+                  onChange={(e) => onChange(name, e.currentTarget.checked)}
                 />
               )}
             </>
