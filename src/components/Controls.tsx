@@ -1,6 +1,10 @@
-import { GraphEvaluator } from "behave-graph";
+import {
+  GraphEvaluator,
+  GraphRegistry,
+  readGraphFromJSON,
+  registerGenericNodes,
+} from "behave-graph";
 import { useState } from "react";
-import { useBehaveGraph } from "../hooks/useBehaveGraph";
 import { ClearModal } from "./ClearModal";
 import { HelpModal } from "./HelpModal";
 import {
@@ -14,17 +18,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { LoadModal } from "./LoadModal";
 import { SaveModal } from "./SaveModal";
+import { flowToBehave } from "../transformers/flowToBehave";
+import { useReactFlow } from "react-flow-renderer/nocss";
 
 const Controls = () => {
   const [loadModalOpen, setLoadModalOpen] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [clearModalOpen, setClearModalOpen] = useState(false);
-
-  const graph = useBehaveGraph();
+  const instance = useReactFlow();
 
   const handleRun = () => {
-    if (graph === undefined) return;
+    const registry = new GraphRegistry();
+    registerGenericNodes(registry.nodes);
+    const nodes = instance.getNodes();
+    const edges = instance.getEdges();
+    const graphJson = flowToBehave(nodes, edges);
+    const graph = readGraphFromJSON(graphJson, registry);
     const evaluator = new GraphEvaluator(graph);
     evaluator.triggerEvents("event/start");
     evaluator.executeAllAsync();

@@ -1,6 +1,5 @@
 import { MouseEvent as ReactMouseEvent, useCallback, useState } from "react";
 import ReactFlow, {
-  addEdge,
   Background,
   BackgroundVariant,
   Connection,
@@ -35,11 +34,28 @@ function Flow() {
   const [lastConnectStart, setLastConnectStart] =
     useState<OnConnectStartParams>();
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
-    (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
+    (connection: Connection) => {
+      if (connection.source === null) return;
+      if (connection.target === null) return;
+
+      const newEdge = {
+        id: uuidv4(),
+        source: connection.source,
+        target: connection.target,
+        sourceHandle: connection.sourceHandle,
+        targetHandle: connection.targetHandle,
+      };
+      onEdgesChange([
+        {
+          type: "add",
+          item: newEdge,
+        },
+      ]);
+    },
+    [onEdgesChange]
   );
 
   const handleAddNode = useCallback(
@@ -65,7 +81,6 @@ function Flow() {
         (node) => node.id === lastConnectStart.nodeId
       );
       if (originNode === undefined) return;
-
       onEdgesChange([
         {
           type: "add",
@@ -92,8 +107,9 @@ function Flow() {
     const element = e.target as HTMLElement;
     if (element.classList.contains("react-flow__pane")) {
       setNodePickerVisibility({ x: e.clientX, y: e.clientY });
+    } else {
+      setLastConnectStart(undefined);
     }
-    setLastConnectStart(undefined);
   };
 
   const closeNodePicker = () => {
