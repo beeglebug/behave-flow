@@ -68,11 +68,6 @@ input::-webkit-inner-spin-button {
   stroke: transparent;
 }
 
-.react-flow__node.selected .node-container {
-  border-color: white;
-}
-
-
 .node-picker ::-webkit-scrollbar {
   @apply w-2;
 }

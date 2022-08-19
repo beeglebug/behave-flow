@@ -29,12 +29,16 @@ const getPairs = <T, U>(arr1: T[], arr2: U[]) => {
   return pairs;
 };
 
-export const Node = ({ id, data, spec }: NodeProps) => {
+export const Node = ({ id, data, spec, selected }: NodeProps) => {
   const edges = useEdges();
   const handleChange = useChangeNodeData(id);
   const pairs = getPairs(spec.inputs, spec.outputs);
   return (
-    <NodeContainer title={getTitle(spec.type)} category={spec.category}>
+    <NodeContainer
+      title={getTitle(spec.type)}
+      category={spec.category}
+      selected={selected}
+    >
       {pairs.map(([input, output], ix) => (
         <div
           key={ix}
