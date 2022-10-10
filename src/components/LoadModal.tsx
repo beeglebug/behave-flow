@@ -12,13 +12,13 @@ import HelloWorld from "behave-graph/dist/graphs/core//HelloWorld.json";
 import Polynomial from "behave-graph/dist/graphs/core/logic/Polynomial.json";
 import SetGet from "behave-graph/dist/graphs/core/variables/SetGet.json";
 
-const examples = {
+const examples: { [key:string]: any } = {
   branch: Branch,
   delay: Delay,
   helloWorld: HelloWorld,
   polynomial: Polynomial,
   setGet: SetGet,
-} as Record<string, GraphJSON>;
+};
 
 export type LoadModalProps = {
   open?: boolean;
@@ -36,7 +36,7 @@ export const LoadModal: FC<LoadModalProps> = ({ open = false, onClose }) => {
     if (value !== undefined) {
       graph = JSON.parse(value) as GraphJSON;
     } else if (selected !== "") {
-      graph = examples[selected];
+      graph = examples[selected] as GraphJSON;
     }
 
     if (graph === undefined) return;
