@@ -5,7 +5,7 @@ const isNullish = (value: any): value is null | undefined =>
   value === undefined || value === null;
 
 export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
-  const graph: GraphJSON = { nodes: [] };
+  const graph: GraphJSON = { nodes: [], variables: [], customEvents: [] };
 
   nodes.forEach((node) => {
     if (node.type === undefined) {

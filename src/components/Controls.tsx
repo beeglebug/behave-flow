@@ -1,8 +1,11 @@
 import {
   GraphEvaluator,
-  GraphRegistry,
+  Registry,
   readGraphFromJSON,
-  registerGenericNodes,
+  registerCoreProfile,
+  registerSceneProfile,
+  DefaultLogger,
+  ManualLifecycleEventEmitter,
 } from "behave-graph";
 import { useState } from "react";
 import { ClearModal } from "./ClearModal";
@@ -29,14 +32,26 @@ const Controls = () => {
   const instance = useReactFlow();
 
   const handleRun = () => {
-    const registry = new GraphRegistry();
-    registerGenericNodes(registry.nodes);
+    const registry = new Registry();
+    registerCoreProfile(registry);
+    registerSceneProfile(registry);
+    registry.implementations.register("ILogger", new DefaultLogger());
+    const manualLifecycleEventEmitter = new ManualLifecycleEventEmitter();
+    registry.implementations.register(
+      "ILifecycleEventEmitter",
+      manualLifecycleEventEmitter
+    );
+
     const nodes = instance.getNodes();
     const edges = instance.getEdges();
     const graphJson = flowToBehave(nodes, edges);
     const graph = readGraphFromJSON(graphJson, registry);
     const evaluator = new GraphEvaluator(graph);
-    evaluator.triggerEvents("event/start");
+
+    manualLifecycleEventEmitter.startEvent.emit();
+    evaluator.executeAllAsync();
+
+    manualLifecycleEventEmitter.tickEvent.emit();
     evaluator.executeAllAsync();
   };
 

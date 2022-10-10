@@ -6,18 +6,18 @@ import { autoLayout } from "../util/autoLayout";
 import { hasPositionMetaData } from "../util/hasPositionMetaData";
 import { Modal } from "./Modal";
 
-import Branch from "behave-graph/dist/examples/basics/Branch.json";
-import Delay from "behave-graph/dist/examples/basics/Delay.json";
-import HelloWorld from "behave-graph/dist/examples/basics/HelloWorld.json";
-import Math from "behave-graph/dist/examples/basics/Math.json";
-import State from "behave-graph/dist/examples/basics/State.json";
+import Branch from "behave-graph/dist/graphs/core/flow/Branch.json";
+import Delay from "behave-graph/dist/graphs/core/async/Delay.json";
+import HelloWorld from "behave-graph/dist/graphs/core//HelloWorld.json";
+import Polynomial from "behave-graph/dist/graphs/core/logic/Polynomial.json";
+import SetGet from "behave-graph/dist/graphs/core/variables/SetGet.json";
 
 const examples = {
   branch: Branch,
   delay: Delay,
   helloWorld: HelloWorld,
-  math: Math,
-  state: State,
+  polynomial: Polynomial,
+  setGet: SetGet,
 } as Record<string, GraphJSON>;
 
 export type LoadModalProps = {
