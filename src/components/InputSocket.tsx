@@ -28,7 +28,11 @@ export default function InputSocket({
 }: InputSocketProps) {
   const instance = useReactFlow();
   const showFlowIcon = valueType === "flow";
-  const colorName = valueTypeColorMap[valueType];
+  let colorName = valueTypeColorMap[valueType];
+  if( colorName === undefined ) {
+    console.warn( `unsupported value type ${valueType}, defaulting to red color`);
+    colorName = "red";
+  }
   const [backgroundColor, borderColor] = colors[colorName];
   return (
     <div className="flex grow items-center justify-start h-7">
