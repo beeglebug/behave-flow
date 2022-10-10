@@ -22,23 +22,24 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
     };
 
     Object.entries(node.data).forEach(([key, value]) => {
-      if (behaveNode.inputs === undefined) {
-        behaveNode.inputs = {};
+      if (behaveNode.parameters === undefined) {
+        behaveNode.parameters = {};
       }
-      behaveNode.inputs[key] = { value: value as string };
+      behaveNode.parameters[key] = { value: value as string };
     });
 
     edges
       .filter((edge) => edge.target === node.id)
       .forEach((edge) => {
-        if (behaveNode.inputs === undefined) {
-          behaveNode.inputs = {};
+        if (behaveNode.parameters === undefined) {
+          behaveNode.parameters = {};
         }
         if (isNullish(edge.targetHandle)) return;
         if (isNullish(edge.sourceHandle)) return;
-
-        behaveNode.inputs[edge.targetHandle] = {
-          links: [{ nodeId: edge.source, socket: edge.sourceHandle }],
+        // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
+        console.warn("some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022");
+        behaveNode.parameters[edge.targetHandle] = {
+          link: { nodeId: edge.source, socket: edge.sourceHandle }
         };
       });
 

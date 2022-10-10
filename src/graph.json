@@ -2,12 +2,12 @@
   "nodes": [
     {
       "id": "c473d135-6ccf-4550-9487-ec64add27f71",
-      "type": "logic/numberConstant",
+      "type": "logic/float",
       "metadata": {
         "positionX": "-1315",
         "positionY": "-341"
       },
-      "inputs": {
+      "parameters": {
         "a": {
           "value": "4"
         }
@@ -15,12 +15,12 @@
     },
     {
       "id": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-      "type": "logic/numberMin",
+      "type": "logic/floatMin",
       "metadata": {
         "positionX": "-1041",
         "positionY": "-246"
       },
-      "inputs": {
+      "parameters": {
         "a": {
           "links": [
             {
@@ -41,12 +41,12 @@
     },
     {
       "id": "ee254bc9-dc1a-47cb-8722-e1fc3d223845",
-      "type": "logic/numberAdd",
+      "type": "logic/floatAdd",
       "metadata": {
         "positionX": "-1261",
         "positionY": "-174"
       },
-      "inputs": {
+      "parameters": {
         "b": {
           "value": "2"
         },
@@ -67,14 +67,13 @@
         "positionX": "-520",
         "positionY": "-138"
       },
-      "inputs": {
+      "parameters": {
         "a": {
-          "links": [
+          "link":
             {
               "nodeId": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
               "socket": "result"
             }
-          ]
         },
         "b": {
           "links": [
@@ -93,24 +92,22 @@
         "positionX": "-298",
         "positionY": "-240"
       },
-      "inputs": {
+      "parameters": {
         "text": {
-          "links": [
+          "link": 
             {
               "nodeId": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
               "socket": "result"
             }
-          ]
-        },
-        "flow": {
-          "links": [
+        }
+      },
+        "flows": {
+          "flow":
             {
               "nodeId": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
               "socket": "flow"
             }
-          ]
         }
-      }
     },
     {
       "id": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
@@ -119,33 +116,30 @@
         "positionX": "-734",
         "positionY": "-373"
       },
-      "inputs": {
+      "parameters": {
         "duration": {
-          "links": [
-            {
+          "link":
+                     {
               "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
               "socket": "result"
             }
-          ]
-        },
+        }
+      },
+      "flows": {
         "flow": {
-          "links": [
-            {
               "nodeId": "1075381d-6135-4aea-a41e-2817365c47f4",
               "socket": "flow"
-            }
-          ]
         }
       }
     },
     {
       "id": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
-      "type": "logic/numberToString",
+      "type": "logic/floatToString",
       "metadata": {
         "positionX": "-759",
         "positionY": "-186"
       },
-      "inputs": {
+      "parameters": {
         "a": {
           "links": [
             {
@@ -158,12 +152,12 @@
     },
     {
       "id": "a42aa674-b4ff-4201-bb13-499a278afe69",
-      "type": "logic/numberConstant",
+      "type": "logic/float",
       "metadata": {
         "positionX": "-1485",
         "positionY": "-212"
       },
-      "inputs": {
+      "parameters": {
         "a": {
           "value": "1"
         }
@@ -176,23 +170,21 @@
         "positionX": "-994",
         "positionY": "-453"
       },
-      "inputs": {
+      "parameters": {
         "text": {
           "value": "starting"
-        },
+        }
+      },
+      "flows": {
         "flow": {
-          "links": [
-            {
-              "nodeId": "0",
-              "socket": "flow"
-            }
-          ]
+          "nodeId": "0",
+          "socket": "flow"
         }
       }
     },
     {
       "id": "0",
-      "type": "event/start",
+      "type": "lifecycle/start",
       "metadata": {
         "positionX": "-1203.1019993023276",
         "positionY": "-552.7667031306669"
@@ -200,16 +192,18 @@
     },
     {
       "id": "1",
-      "type": "logic/stringConstant",
+      "type": "logic/string",
       "metadata": {
         "positionX": "-805.6381337883894",
         "positionY": "-39.68087470688066"
       },
-      "inputs": {
+      "parameters": {
         "a": {
           "value": " seconds later"
         }
       }
     }
-  ]
+  ],
+  "customEvents": [],
+  "variables": []
 }
