@@ -18,7 +18,7 @@ export default function NodeContainer({
 }: PropsWithChildren<NodeProps>) {
   let colorName = categoryColorMap[category];
   if( colorName === undefined ) {
-    console.warn( `unsupported category ${valueType}, defaulting to red color`);
+    console.warn( `unsupported category ${category}, defaulting to red color`);
     colorName = "red";
   }
   let [backgroundColor, borderColor, textColor] = colors[colorName];
