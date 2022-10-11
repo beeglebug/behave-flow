@@ -10,7 +10,7 @@ body,
 
 /* fixes issue with tailwind resetting flow control buttons */
 button,
-[type='button'] {
+[type="button"] {
   background-color: #fff;
 }
 
@@ -41,10 +41,16 @@ select {
   cursor: pointer;
 }
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
+input[type="integer"] {
+  -moz-appearance: textfield;
+}
+input[type="float"] {
+  -moz-appearance: textfield;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

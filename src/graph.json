@@ -69,11 +69,10 @@
       },
       "parameters": {
         "a": {
-          "link":
-            {
-              "nodeId": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
-              "socket": "result"
-            }
+          "link": {
+            "nodeId": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
+            "socket": "result"
+          }
         },
         "b": {
           "links": [
@@ -94,20 +93,12 @@
       },
       "parameters": {
         "text": {
-          "link": 
-            {
-              "nodeId": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
-              "socket": "result"
-            }
+          "link": {
+            "nodeId": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
+            "socket": "result"
+          }
         }
-      },
-        "flows": {
-          "flow":
-            {
-              "nodeId": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
-              "socket": "flow"
-            }
-        }
+      }
     },
     {
       "id": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
@@ -118,17 +109,16 @@
       },
       "parameters": {
         "duration": {
-          "link":
-                     {
-              "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-              "socket": "result"
-            }
+          "link": {
+            "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
+            "socket": "result"
+          }
         }
       },
       "flows": {
         "flow": {
-              "nodeId": "1075381d-6135-4aea-a41e-2817365c47f4",
-              "socket": "flow"
+          "nodeId": "5fad360b-8a35-4e52-8778-6aac9723b98d",
+          "socket": "flow"
         }
       }
     },
@@ -177,7 +167,7 @@
       },
       "flows": {
         "flow": {
-          "nodeId": "0",
+          "nodeId": "8dce11fa-4831-4ecf-bf89-29ad83e3d56",
           "socket": "flow"
         }
       }
@@ -188,6 +178,12 @@
       "metadata": {
         "positionX": "-1203.1019993023276",
         "positionY": "-552.7667031306669"
+      },
+      "flows": {
+        "flow": {
+          "nodeId": "1075381d-6135-4aea-a41e-2817365c47f4",
+          "socket": "flow"
+        }
       }
     },
     {

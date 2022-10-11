@@ -33,10 +33,20 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
             target: nodeJSON.id,
             targetHandle: inputKey,
           });
-        }
-        else if (input.value !== undefined) {
+        } else if (input.value !== undefined) {
           node.data[inputKey] = input.value;
         }
+      }
+    }
+    if (nodeJSON.flows) {
+      for (const [inputKey, link] of Object.entries(nodeJSON.flows)) {
+        edges.push({
+          id: uuidv4(),
+          source: nodeJSON.id,
+          sourceHandle: inputKey,
+          target: link.nodeId,
+          targetHandle: link.socket,
+        });
       }
     }
   });

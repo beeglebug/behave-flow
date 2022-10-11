@@ -1,9 +1,10 @@
 import { Connection, ReactFlowInstance } from "react-flow-renderer/nocss";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";
-import rawSpecJson from "behave-graph/dist/node-spec.json";
-import { NodeSpecJSON } from "behave-graph";
+import { getNodeSpecJSON } from "./nodeSpec";
+//import rawSpecJson from "behave-graph/dist/node-spec.json";
+//import { NodeSpecJSON } from "behave-graph";
 
-const specJSON = rawSpecJson as NodeSpecJSON[];
+const specJSON = getNodeSpecJSON(); //const spec = specJson as NodeSpecJSON[];
 
 export const isValidConnection = (
   connection: Connection,

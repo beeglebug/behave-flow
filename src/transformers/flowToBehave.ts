@@ -28,6 +28,7 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
       behaveNode.parameters[key] = { value: value as string };
     });
 
+    console.log("node", node);
     edges
       .filter((edge) => edge.target === node.id)
       .forEach((edge) => {
@@ -36,10 +37,11 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
         }
         if (isNullish(edge.targetHandle)) return;
         if (isNullish(edge.sourceHandle)) return;
+        console.log("edge", edge);
+
         // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
-        console.warn("some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022");
         behaveNode.parameters[edge.targetHandle] = {
-          link: { nodeId: edge.source, socket: edge.sourceHandle }
+          link: { nodeId: edge.source, socket: edge.sourceHandle },
         };
       });
 

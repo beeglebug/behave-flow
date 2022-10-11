@@ -29,8 +29,10 @@ export default function InputSocket({
   const instance = useReactFlow();
   const showFlowIcon = valueType === "flow";
   let colorName = valueTypeColorMap[valueType];
-  if( colorName === undefined ) {
-    console.warn( `unsupported value type ${valueType}, defaulting to red color`);
+  if (colorName === undefined) {
+    console.warn(
+      `unsupported value type ${valueType}, defaulting to red color`
+    );
     colorName = "red";
   }
   const [backgroundColor, borderColor] = colors[colorName];
@@ -53,6 +55,22 @@ export default function InputSocket({
                 />
               )}
               {valueType === "number" && (
+                <AutoSizeInput
+                  type="number"
+                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+                  value={String(value) ?? defaultValue ?? ""}
+                  onChange={(e) => onChange(name, e.currentTarget.value)}
+                />
+              )}
+              {valueType === "float" && (
+                <AutoSizeInput
+                  type="number"
+                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+                  value={String(value) ?? defaultValue ?? ""}
+                  onChange={(e) => onChange(name, e.currentTarget.value)}
+                />
+              )}
+              {valueType === "integer" && (
                 <AutoSizeInput
                   type="number"
                   className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
