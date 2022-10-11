@@ -1,4 +1,4 @@
-import { GraphJSON } from "behave-graph";
+import { GraphJSON, Link } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer/nocss";
 import { v4 as uuidv4 } from "uuid";
 import { getNodeSpecJSON } from "../util/nodeSpec";
@@ -26,7 +26,7 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
 
     if (nodeJSON.parameters) {
       for (const [inputKey, input] of Object.entries(nodeJSON.parameters)) {
-        if (input.link !== undefined) {
+        if ("link" in input) {
           edges.push({
             id: uuidv4(),
             source: input.link.nodeId,
@@ -34,7 +34,7 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
             target: nodeJSON.id,
             targetHandle: inputKey,
           });
-        } else if (input.value !== undefined) {
+        } else if ("value" in input) {
           node.data[inputKey] = input.value;
         }
       }
