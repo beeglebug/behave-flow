@@ -1,5 +1,9 @@
 import { GraphJSON, NodeJSON } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer/nocss";
+import { OutputFileType } from "typescript";
+import { getNodeSpecJSON } from "../util/nodeSpec";
+
+const nodeSpecJSON = getNodeSpecJSON();
 
 const isNullish = (value: any): value is null | undefined =>
   value === undefined || value === null;
@@ -11,6 +15,12 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
     if (node.type === undefined) {
       return;
     }
+
+    const nodeSpec = nodeSpecJSON.find(
+      (nodeSpec) => nodeSpec.type === node.type
+    );
+    if (nodeSpec === undefined)
+      throw new Error(`can not find nodeSpec for ${node.type}`);
 
     const behaveNode: NodeJSON = {
       id: node.id,
@@ -28,20 +38,47 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
       behaveNode.parameters[key] = { value: value as string };
     });
 
-    console.log("node", node);
     edges
       .filter((edge) => edge.target === node.id)
       .forEach((edge) => {
+        const inputSpec = nodeSpec.inputs.find(
+          (input) => input.name === edge.targetHandle
+        );
+        if (inputSpec && inputSpec.valueType === "flow") {
+          // skip flows
+          return;
+        }
         if (behaveNode.parameters === undefined) {
           behaveNode.parameters = {};
         }
         if (isNullish(edge.targetHandle)) return;
         if (isNullish(edge.sourceHandle)) return;
-        console.log("edge", edge);
 
         // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
         behaveNode.parameters[edge.targetHandle] = {
           link: { nodeId: edge.source, socket: edge.sourceHandle },
+        };
+      });
+
+    edges
+      .filter((edge) => edge.source === node.id)
+      .forEach((edge) => {
+        const outputSpec = nodeSpec.outputs.find(
+          (output) => output.name === edge.sourceHandle
+        );
+        if (outputSpec && outputSpec.valueType !== "flow") {
+          return;
+        }
+        if (behaveNode.flows === undefined) {
+          behaveNode.flows = {};
+        }
+        if (isNullish(edge.targetHandle)) return;
+        if (isNullish(edge.sourceHandle)) return;
+
+        // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
+        behaveNode.flows[edge.sourceHandle] = {
+          nodeId: edge.target,
+          socket: edge.targetHandle,
         };
       });
 

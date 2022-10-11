@@ -1,6 +1,7 @@
 import { GraphJSON } from "behave-graph";
 import { Edge, Node } from "react-flow-renderer/nocss";
 import { v4 as uuidv4 } from "uuid";
+import { getNodeSpecJSON } from "../util/nodeSpec";
 
 export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
   const nodes: Node[] = [];
