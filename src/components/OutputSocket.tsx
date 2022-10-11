@@ -24,13 +24,20 @@ export default function OutputSocket({
   const isFlowSocket = valueType === "flow";
   const colorName = valueTypeColorMap[valueType];
   const [backgroundColor, borderColor] = colors[colorName];
+  const showName = isFlowSocket === false || name !== "flow";
 
   return (
     <div className="flex grow items-center justify-end h-7">
+      {showName && <div className="capitalize">{name}</div>}
       {isFlowSocket && (
-        <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
+        <FontAwesomeIcon
+          icon={faCaretRight}
+          color="#ffffff"
+          size="lg"
+          className="ml-1"
+        />
       )}
-      {isFlowSocket === false && <div className="capitalize">{name}</div>}
+
       <Handle
         id={name}
         type="source"

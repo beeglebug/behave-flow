@@ -30,41 +30,39 @@ export default function InputSocket({
   const isFlowSocket = valueType === "flow";
   const colorName = valueTypeColorMap[valueType];
   const [backgroundColor, borderColor] = colors[colorName];
+  const showName = isFlowSocket === false || name !== "flow";
+
   return (
     <div className="flex grow items-center justify-start h-7">
       {isFlowSocket && (
         <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
       )}
-      {isFlowSocket === false && (
+      {showName && <div className="capitalize mr-2">{name}</div>}
+      {isFlowSocket === false && connected === false && (
         <>
-          <div className="capitalize mr-2">{name}</div>
-          {connected === false && (
-            <>
-              {valueType === "string" && (
-                <AutoSizeInput
-                  type="text"
-                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-                  value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.currentTarget.value)}
-                />
-              )}
-              {valueType === "number" && (
-                <AutoSizeInput
-                  type="number"
-                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-                  value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.currentTarget.value)}
-                />
-              )}
-              {valueType === "boolean" && (
-                <input
-                  type="checkbox"
-                  className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-                  value={String(value) ?? defaultValue ?? ""}
-                  onChange={(e) => onChange(name, e.currentTarget.checked)}
-                />
-              )}
-            </>
+          {valueType === "string" && (
+            <AutoSizeInput
+              type="text"
+              className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+              value={String(value) ?? defaultValue ?? ""}
+              onChange={(e) => onChange(name, e.currentTarget.value)}
+            />
+          )}
+          {valueType === "number" && (
+            <AutoSizeInput
+              type="number"
+              className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+              value={String(value) ?? defaultValue ?? ""}
+              onChange={(e) => onChange(name, e.currentTarget.value)}
+            />
+          )}
+          {valueType === "boolean" && (
+            <input
+              type="checkbox"
+              className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+              value={String(value) ?? defaultValue ?? ""}
+              onChange={(e) => onChange(name, e.currentTarget.checked)}
+            />
           )}
         </>
       )}
