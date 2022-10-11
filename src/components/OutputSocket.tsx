@@ -21,16 +21,16 @@ export default function OutputSocket({
   name,
 }: OutputSocketProps) {
   const instance = useReactFlow();
-  const showFlowIcon = valueType === "flow";
+  const isFlowSocket = valueType === "flow";
   const colorName = valueTypeColorMap[valueType];
   const [backgroundColor, borderColor] = colors[colorName];
 
   return (
     <div className="flex grow items-center justify-end h-7">
-      {showFlowIcon && (
+      {isFlowSocket && (
         <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
       )}
-      {showFlowIcon === false && <div className="capitalize">{name}</div>}
+      {isFlowSocket === false && <div className="capitalize">{name}</div>}
       <Handle
         id={name}
         type="source"

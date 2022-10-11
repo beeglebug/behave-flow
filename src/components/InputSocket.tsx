@@ -27,15 +27,15 @@ export default function InputSocket({
   defaultValue,
 }: InputSocketProps) {
   const instance = useReactFlow();
-  const showFlowIcon = valueType === "flow";
+  const isFlowSocket = valueType === "flow";
   const colorName = valueTypeColorMap[valueType];
   const [backgroundColor, borderColor] = colors[colorName];
   return (
     <div className="flex grow items-center justify-start h-7">
-      {showFlowIcon && (
+      {isFlowSocket && (
         <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
       )}
-      {showFlowIcon === false && (
+      {isFlowSocket === false && (
         <>
           <div className="capitalize mr-2">{name}</div>
           {connected === false && (
