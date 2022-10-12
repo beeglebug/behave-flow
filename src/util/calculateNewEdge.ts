@@ -1,10 +1,9 @@
-import { NodeSpecJSON } from "behave-graph";
-import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { v4 as uuidv4 } from "uuid";
 import { Node, OnConnectStartParams } from "reactflow";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";
+import { getNodeSpecJSON } from "./getNodeSpecJSON";
 
-const specJSON = rawSpecJson as NodeSpecJSON[];
+const specJSON = getNodeSpecJSON();
 
 export const calculateNewEdge = (
   originNode: Node,

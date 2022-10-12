@@ -1,215 +1,119 @@
 {
   "nodes": [
     {
-      "id": "c473d135-6ccf-4550-9487-ec64add27f71",
-      "type": "logic/numberConstant",
-      "metadata": {
-        "positionX": "-1315",
-        "positionY": "-341"
-      },
-      "inputs": {
-        "a": {
-          "value": "4"
-        }
-      }
-    },
-    {
-      "id": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-      "type": "logic/numberMin",
-      "metadata": {
-        "positionX": "-1041",
-        "positionY": "-246"
-      },
-      "inputs": {
-        "a": {
-          "links": [
-            {
-              "nodeId": "c473d135-6ccf-4550-9487-ec64add27f71",
-              "socket": "result"
-            }
-          ]
-        },
-        "b": {
-          "links": [
-            {
-              "nodeId": "ee254bc9-dc1a-47cb-8722-e1fc3d223845",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "ee254bc9-dc1a-47cb-8722-e1fc3d223845",
-      "type": "logic/numberAdd",
-      "metadata": {
-        "positionX": "-1261",
-        "positionY": "-174"
-      },
-      "inputs": {
-        "b": {
-          "value": "2"
-        },
-        "a": {
-          "links": [
-            {
-              "nodeId": "a42aa674-b4ff-4201-bb13-499a278afe69",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
-      "type": "logic/stringConcat",
-      "metadata": {
-        "positionX": "-520",
-        "positionY": "-138"
-      },
-      "inputs": {
-        "a": {
-          "links": [
-            {
-              "nodeId": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
-              "socket": "result"
-            }
-          ]
-        },
-        "b": {
-          "links": [
-            {
-              "nodeId": "1",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "5fad360b-8a35-4e52-8778-6aac9723b98d",
-      "type": "action/log",
-      "metadata": {
-        "positionX": "-298",
-        "positionY": "-240"
-      },
-      "inputs": {
-        "text": {
-          "links": [
-            {
-              "nodeId": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
-              "socket": "result"
-            }
-          ]
-        },
-        "flow": {
-          "links": [
-            {
-              "nodeId": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
-              "socket": "flow"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
-      "type": "time/delay",
-      "metadata": {
-        "positionX": "-734",
-        "positionY": "-373"
-      },
-      "inputs": {
-        "duration": {
-          "links": [
-            {
-              "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-              "socket": "result"
-            }
-          ]
-        },
-        "flow": {
-          "links": [
-            {
-              "nodeId": "1075381d-6135-4aea-a41e-2817365c47f4",
-              "socket": "flow"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
-      "type": "logic/numberToString",
-      "metadata": {
-        "positionX": "-759",
-        "positionY": "-186"
-      },
-      "inputs": {
-        "a": {
-          "links": [
-            {
-              "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "a42aa674-b4ff-4201-bb13-499a278afe69",
-      "type": "logic/numberConstant",
-      "metadata": {
-        "positionX": "-1485",
-        "positionY": "-212"
-      },
-      "inputs": {
-        "a": {
-          "value": "1"
-        }
-      }
-    },
-    {
-      "id": "1075381d-6135-4aea-a41e-2817365c47f4",
-      "type": "action/log",
-      "metadata": {
-        "positionX": "-994",
-        "positionY": "-453"
-      },
-      "inputs": {
-        "text": {
-          "value": "starting"
-        },
-        "flow": {
-          "links": [
-            {
-              "nodeId": "0",
-              "socket": "flow"
-            }
-          ]
-        }
-      }
-    },
-    {
       "id": "0",
-      "type": "event/start",
+      "type": "lifecycle/start",
       "metadata": {
-        "positionX": "-1203.1019993023276",
-        "positionY": "-552.7667031306669"
+        "positionX": "-579",
+        "positionY": "-67"
+      },
+      "flows": {
+        "flow": {
+          "nodeId": "1",
+          "socket": "flow"
+        }
       }
     },
     {
       "id": "1",
-      "type": "logic/stringConstant",
+      "type": "action/log",
       "metadata": {
-        "positionX": "-805.6381337883894",
-        "positionY": "-39.68087470688066"
+        "positionX": "-422",
+        "positionY": "-67"
       },
-      "inputs": {
-        "a": {
-          "value": " seconds later"
+      "parameters": {
+        "text": {
+          "value": "Starting Sequence..."
+        }
+      },
+      "flows": {
+        "flow": {
+          "nodeId": "2",
+          "socket": "flow"
+        }
+      }
+    },
+    {
+      "id": "2",
+      "type": "flow/sequence",
+      "metadata": {
+        "positionX": "-164",
+        "positionY": "-67"
+      },
+      "flows": {
+        "1": {
+          "nodeId": "3",
+          "socket": "flow"
+        },
+        "2": {
+          "nodeId": "4",
+          "socket": "flow"
+        },
+        "3": {
+          "nodeId": "5",
+          "socket": "flow"
+        }
+      }
+    },
+    {
+      "id": "3",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "32",
+        "positionY": "-99"
+      },
+      "parameters": {
+        "text": {
+          "value": "First Sequence Output!"
+        }
+      },
+      "flows": {
+        "flow": {
+          "nodeId": "6",
+          "socket": "flow"
+        }
+      }
+    },
+    {
+      "id": "4",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "26",
+        "positionY": "40"
+      },
+      "parameters": {
+        "text": {
+          "value": "Second Sequence Output!"
+        }
+      }
+    },
+    {
+      "id": "5",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "21",
+        "positionY": "179"
+      },
+      "parameters": {
+        "text": {
+          "value": "Third Sequence Output!"
+        }
+      }
+    },
+    {
+      "id": "6",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "321",
+        "positionY": "-98"
+      },
+      "parameters": {
+        "text": {
+          "value": "Downstream of First Sequence!"
         }
       }
     }
-  ]
+  ],
+  "variables": [],
+  "customEvents": []
 }

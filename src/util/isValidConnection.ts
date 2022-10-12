@@ -1,10 +1,9 @@
 import { Connection, ReactFlowInstance } from "reactflow";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";
-import rawSpecJson from "behave-graph/dist/node-spec.json";
-import { NodeSpecJSON } from "behave-graph";
 import { isHandleConnected } from "./isHandleConnected";
+import { getNodeSpecJSON } from "./getNodeSpecJSON";
 
-const specJSON = rawSpecJson as NodeSpecJSON[];
+const specJSON = getNodeSpecJSON();
 
 export const isValidConnection = (
   connection: Connection,

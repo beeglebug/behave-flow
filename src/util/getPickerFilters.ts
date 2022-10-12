@@ -1,10 +1,9 @@
 import { Node, OnConnectStartParams } from "reactflow";
-import { NodeSpecJSON } from "behave-graph";
-import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { NodePickerFilters } from "../components/NodePicker";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";
+import { getNodeSpecJSON } from "./getNodeSpecJSON";
 
-const specJSON = rawSpecJson as NodeSpecJSON[];
+const specJSON = getNodeSpecJSON();
 
 export const getNodePickerFilters = (
   nodes: Node[],

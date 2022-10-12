@@ -17,7 +17,10 @@ export default function OutputSocket({
 }: OutputSocketProps) {
   const instance = useReactFlow();
   const isFlowSocket = valueType === "flow";
-  const colorName = valueTypeColorMap[valueType];
+  let colorName = valueTypeColorMap[valueType];
+  if (colorName === undefined) {
+    colorName = "red";
+  }
   const [backgroundColor, borderColor] = colors[colorName];
   const showName = isFlowSocket === false || name !== "flow";
 

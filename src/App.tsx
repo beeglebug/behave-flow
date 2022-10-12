@@ -18,8 +18,6 @@ import NodePicker from "./components/NodePicker";
 import { getNodePickerFilters } from "./util/getPickerFilters";
 import { calculateNewEdge } from "./util/calculateNewEdge";
 
-import "reactflow/dist/base.css";
-
 const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = behaveToFlow(graphJSON);

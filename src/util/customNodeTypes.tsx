@@ -1,9 +1,8 @@
 import { NodeTypes } from "reactflow";
-import { NodeSpecJSON } from "behave-graph";
-import specJson from "behave-graph/dist/node-spec.json";
 import { Node } from "../components/Node";
+import { getNodeSpecJSON } from "./getNodeSpecJSON";
 
-const spec = specJson as NodeSpecJSON[];
+const spec = getNodeSpecJSON();
 
 export const customNodeTypes = spec.reduce((nodes, node) => {
   nodes[node.type] = (props) => <Node spec={node} {...props} />;

@@ -11,7 +11,8 @@ type NodeProps = FlowNodeProps & {
 };
 
 const getTitle = (type: string) => {
-  const end = type.substring(type.lastIndexOf("/") + 1);
+  const tokens = type.split("/");
+  const end = tokens[Math.min(tokens.length - 1, 1)]; // handles polymorphic node naming structure
   const spaces = end.replace(/([A-Z])/g, " $1");
   return spaces.charAt(0).toUpperCase() + spaces.slice(1);
 };

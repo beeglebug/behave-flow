@@ -23,7 +23,12 @@ export default function InputSocket({
 }: InputSocketProps) {
   const instance = useReactFlow();
   const isFlowSocket = valueType === "flow";
-  const colorName = valueTypeColorMap[valueType];
+
+  let colorName = valueTypeColorMap[valueType];
+  if (colorName === undefined) {
+    colorName = "red";
+  }
+
   const [backgroundColor, borderColor] = colors[colorName];
   const showName = isFlowSocket === false || name !== "flow";
 
@@ -44,6 +49,22 @@ export default function InputSocket({
             />
           )}
           {valueType === "number" && (
+            <AutoSizeInput
+              type="number"
+              className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+              value={String(value) ?? defaultValue ?? ""}
+              onChange={(e) => onChange(name, e.currentTarget.value)}
+            />
+          )}
+          {valueType === "float" && (
+            <AutoSizeInput
+              type="number"
+              className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+              value={String(value) ?? defaultValue ?? ""}
+              onChange={(e) => onChange(name, e.currentTarget.value)}
+            />
+          )}
+          {valueType === "integer" && (
             <AutoSizeInput
               type="number"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
