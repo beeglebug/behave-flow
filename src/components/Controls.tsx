@@ -31,7 +31,7 @@ const CustomControls = () => {
   const [clearModalOpen, setClearModalOpen] = useState(false);
   const instance = useReactFlow();
 
-  const handleRun = () => {
+  const handleRun = async () => {
     const registry = new Registry();
     registerCoreProfile(registry);
     registerSceneProfile(registry);
@@ -46,13 +46,28 @@ const CustomControls = () => {
     const edges = instance.getEdges();
     const graphJson = flowToBehave(nodes, edges);
     const graph = readGraphFromJSON(graphJson, registry);
-    const evaluator = new GraphEvaluator(graph);
 
-    manualLifecycleEventEmitter.startEvent.emit();
-    evaluator.executeAllAsync();
+    const graphEvaluator = new GraphEvaluator(graph);
 
-    manualLifecycleEventEmitter.tickEvent.emit();
-    evaluator.executeAllAsync();
+    await graphEvaluator.executeAll();
+
+    if (manualLifecycleEventEmitter.startEvent.listenerCount > 0) {
+      manualLifecycleEventEmitter.startEvent.emit();
+      await graphEvaluator.executeAllAsync(5);
+    }
+
+    if (manualLifecycleEventEmitter.tickEvent.listenerCount > 0) {
+      const iteations = 5;
+      for (let tick = 0; tick < iteations; tick++) {
+        manualLifecycleEventEmitter.tickEvent.emit();
+        await graphEvaluator.executeAllAsync(5);
+      }
+    }
+
+    if (manualLifecycleEventEmitter.endEvent.listenerCount > 0) {
+      manualLifecycleEventEmitter.endEvent.emit();
+      await graphEvaluator.executeAllAsync(5);
+    }
   };
 
   return (

@@ -39,6 +39,7 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
         }
       }
     }
+
     if (nodeJSON.flows) {
       for (const [inputKey, link] of Object.entries(nodeJSON.flows)) {
         edges.push({
