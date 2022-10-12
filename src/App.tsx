@@ -13,16 +13,17 @@ import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/Controls";
-import rawGraphJSON from "behave-graph/src/graphs/core/flow/ForLoop.json";
+import rawGraphJSON from "./graph.json"; //behave-graph/src/graphs/core/flow/Sequence.json";
+
 import { GraphJSON } from "behave-graph";
 import CustomEdge from "./components/CustomEdge";
 import NodePicker from "./components/NodePicker";
 import { getNodePickerFilters } from "./util/getPickerFilters";
 import { calculateNewEdge } from "./util/calculateNewEdge";
 
-const graphJSON = rawGraphJSON as GraphJSON;
+const graphJSON = rawGraphJSON as any;
 
-const [initialNodes, initialEdges] = behaveToFlow(graphJSON);
+const [initialNodes, initialEdges] = behaveToFlow(graphJSON as GraphJSON);
 
 const edgeTypes = {
   default: CustomEdge,

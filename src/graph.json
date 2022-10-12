@@ -1,8 +1,12 @@
 {
   "nodes": [
     {
-      "type": "lifecycle/start",
       "id": "0",
+      "type": "lifecycle/start",
+      "metadata": {
+        "positionX": "-579",
+        "positionY": "-67"
+      },
       "flows": {
         "flow": {
           "nodeId": "1",
@@ -11,11 +15,15 @@
       }
     },
     {
-      "type": "action/log",
       "id": "1",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "-422",
+        "positionY": "-67"
+      },
       "parameters": {
         "text": {
-          "value": "Starting For Loop..."
+          "value": "Starting Sequence..."
         }
       },
       "flows": {
@@ -26,44 +34,86 @@
       }
     },
     {
-      "type": "flow/forLoop",
       "id": "2",
-      "parameters": {
-        "startIndex": {
-          "value": "0"
-        },
-        "endIndex": {
-          "value": "10"
-        }
+      "type": "flow/sequence",
+      "metadata": {
+        "positionX": "-164",
+        "positionY": "-67"
       },
       "flows": {
-        "loopBody": {
+        "1": {
           "nodeId": "3",
           "socket": "flow"
         },
-        "completed": {
+        "2": {
           "nodeId": "4",
+          "socket": "flow"
+        },
+        "3": {
+          "nodeId": "5",
           "socket": "flow"
         }
       }
     },
     {
-      "type": "action/log",
       "id": "3",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "32",
+        "positionY": "-99"
+      },
       "parameters": {
         "text": {
-          "value": "Loop Body!"
+          "value": "First Sequence Output!"
+        }
+      },
+      "flows": {
+        "flow": {
+          "nodeId": "6",
+          "socket": "flow"
         }
       }
     },
     {
-      "type": "action/log",
       "id": "4",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "26",
+        "positionY": "40"
+      },
       "parameters": {
         "text": {
-          "value": "Completed For Loop!"
+          "value": "Second Sequence Output!"
+        }
+      }
+    },
+    {
+      "id": "5",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "21",
+        "positionY": "179"
+      },
+      "parameters": {
+        "text": {
+          "value": "Third Sequence Output!"
+        }
+      }
+    },
+    {
+      "id": "6",
+      "type": "action/log",
+      "metadata": {
+        "positionX": "321",
+        "positionY": "-98"
+      },
+      "parameters": {
+        "text": {
+          "value": "Downstream of First Sequence!"
         }
       }
     }
-  ]
+  ],
+  "variables": [],
+  "customEvents": []
 }
