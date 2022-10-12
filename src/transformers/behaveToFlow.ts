@@ -7,7 +7,7 @@ export const behaveToFlow = (graph: GraphJSON): [Node[], Edge[]] => {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  graph.nodes.forEach((nodeJSON) => {
+  graph.nodes?.forEach((nodeJSON) => {
     const node: Node = {
       id: nodeJSON.id,
       type: nodeJSON.type,

@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/Controls";
-import rawGraphJSON from "./graph.json";
+import rawGraphJSON from "behave-graph/src/graphs/core/flow/ForLoop.json";
 import { GraphJSON } from "behave-graph";
 import CustomEdge from "./components/CustomEdge";
 import NodePicker from "./components/NodePicker";

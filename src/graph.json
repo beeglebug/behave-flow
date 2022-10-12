@@ -1,205 +1,69 @@
 {
   "nodes": [
     {
-      "id": "c473d135-6ccf-4550-9487-ec64add27f71",
-      "type": "logic/float",
-      "metadata": {
-        "positionX": "-1315",
-        "positionY": "-341"
-      },
-      "parameters": {
-        "a": {
-          "value": "4"
-        }
-      }
-    },
-    {
-      "id": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-      "type": "logic/floatMin",
-      "metadata": {
-        "positionX": "-1041",
-        "positionY": "-246"
-      },
-      "parameters": {
-        "a": {
-          "links": [
-            {
-              "nodeId": "c473d135-6ccf-4550-9487-ec64add27f71",
-              "socket": "result"
-            }
-          ]
-        },
-        "b": {
-          "links": [
-            {
-              "nodeId": "ee254bc9-dc1a-47cb-8722-e1fc3d223845",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "ee254bc9-dc1a-47cb-8722-e1fc3d223845",
-      "type": "logic/floatAdd",
-      "metadata": {
-        "positionX": "-1261",
-        "positionY": "-174"
-      },
-      "parameters": {
-        "b": {
-          "value": "2"
-        },
-        "a": {
-          "links": [
-            {
-              "nodeId": "a42aa674-b4ff-4201-bb13-499a278afe69",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
-      "type": "logic/stringConcat",
-      "metadata": {
-        "positionX": "-520",
-        "positionY": "-138"
-      },
-      "parameters": {
-        "a": {
-          "link": {
-            "nodeId": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
-            "socket": "result"
-          }
-        },
-        "b": {
-          "links": [
-            {
-              "nodeId": "1",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "5fad360b-8a35-4e52-8778-6aac9723b98d",
-      "type": "action/log",
-      "metadata": {
-        "positionX": "-298",
-        "positionY": "-240"
-      },
-      "parameters": {
-        "text": {
-          "link": {
-            "nodeId": "c6e68a5d-8025-4cfb-9a32-d48f9fde31c9",
-            "socket": "result"
-          }
-        }
-      }
-    },
-    {
-      "id": "8dce11fa-4831-4ecf-bf89-29ad83e3d562",
-      "type": "time/delay",
-      "metadata": {
-        "positionX": "-734",
-        "positionY": "-373"
-      },
-      "parameters": {
-        "duration": {
-          "link": {
-            "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-            "socket": "result"
-          }
-        }
-      },
-      "flows": {
-        "flow": {
-          "nodeId": "5fad360b-8a35-4e52-8778-6aac9723b98d",
-          "socket": "flow"
-        }
-      }
-    },
-    {
-      "id": "16f505ec-fc02-4ed7-a474-cdf2cdc2ee8d",
-      "type": "logic/floatToString",
-      "metadata": {
-        "positionX": "-759",
-        "positionY": "-186"
-      },
-      "parameters": {
-        "a": {
-          "links": [
-            {
-              "nodeId": "7d9c5b25-3ff2-4d3d-8958-c8189ab8d1e2",
-              "socket": "result"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "a42aa674-b4ff-4201-bb13-499a278afe69",
-      "type": "logic/float",
-      "metadata": {
-        "positionX": "-1485",
-        "positionY": "-212"
-      },
-      "parameters": {
-        "a": {
-          "value": "1"
-        }
-      }
-    },
-    {
-      "id": "1075381d-6135-4aea-a41e-2817365c47f4",
-      "type": "action/log",
-      "metadata": {
-        "positionX": "-994",
-        "positionY": "-453"
-      },
-      "parameters": {
-        "text": {
-          "value": "starting"
-        }
-      },
-      "flows": {
-        "flow": {
-          "nodeId": "8dce11fa-4831-4ecf-bf89-29ad83e3d56",
-          "socket": "flow"
-        }
-      }
-    },
-    {
-      "id": "0",
       "type": "lifecycle/start",
-      "metadata": {
-        "positionX": "-1203.1019993023276",
-        "positionY": "-552.7667031306669"
-      },
+      "id": "0",
       "flows": {
         "flow": {
-          "nodeId": "1075381d-6135-4aea-a41e-2817365c47f4",
+          "nodeId": "1",
           "socket": "flow"
         }
       }
     },
     {
+      "type": "action/log",
       "id": "1",
-      "type": "logic/string",
-      "metadata": {
-        "positionX": "-805.6381337883894",
-        "positionY": "-39.68087470688066"
-      },
       "parameters": {
-        "a": {
-          "value": " seconds later"
+        "text": {
+          "value": "Starting For Loop..."
+        }
+      },
+      "flows": {
+        "flow": {
+          "nodeId": "2",
+          "socket": "flow"
+        }
+      }
+    },
+    {
+      "type": "flow/forLoop",
+      "id": "2",
+      "parameters": {
+        "startIndex": {
+          "value": "0"
+        },
+        "endIndex": {
+          "value": "10"
+        }
+      },
+      "flows": {
+        "loopBody": {
+          "nodeId": "3",
+          "socket": "flow"
+        },
+        "completed": {
+          "nodeId": "4",
+          "socket": "flow"
+        }
+      }
+    },
+    {
+      "type": "action/log",
+      "id": "3",
+      "parameters": {
+        "text": {
+          "value": "Loop Body!"
+        }
+      }
+    },
+    {
+      "type": "action/log",
+      "id": "4",
+      "parameters": {
+        "text": {
+          "value": "Completed For Loop!"
         }
       }
     }
-  ],
-  "customEvents": [],
-  "variables": []
+  ]
 }

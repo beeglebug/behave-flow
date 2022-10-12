@@ -19,8 +19,10 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
     const nodeSpec = nodeSpecJSON.find(
       (nodeSpec) => nodeSpec.type === node.type
     );
-    if (nodeSpec === undefined)
-      throw new Error(`can not find nodeSpec for ${node.type}`);
+    if (nodeSpec === undefined) {
+      console.warn(`can not find nodeSpec for ${node.type}`);
+      return;
+    }
 
     const behaveNode: NodeJSON = {
       id: node.id,
@@ -84,7 +86,7 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
 
     // TODO filter out any orphan nodes at this point, to avoid errors further down inside behave-graph
 
-    graph.nodes.push(behaveNode);
+    graph.nodes?.push(behaveNode);
   });
 
   return graph;
