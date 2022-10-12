@@ -54,18 +54,8 @@ input::-webkit-inner-spin-button {
   stroke: #555;
 }
 
-.react-flow__edge .edge-path-bg {
-  stroke: transparent;
-  stroke-width: 9;
-  cursor: pointer;
-}
-
 .react-flow__edge.selected .react-flow__edge-path {
   stroke: #fff;
-}
-
-.react-flow__edge.selected .edge-path-bg {
-  stroke: transparent;
 }
 
 .node-picker ::-webkit-scrollbar {
@@ -78,4 +68,12 @@ input::-webkit-inner-spin-button {
 
 .node-picker ::-webkit-scrollbar-thumb {
   @apply bg-gray-600;
+}
+
+.react-flow .react-flow__controls {
+  display: flex;
+  top: 0;
+  right: 0;
+  left: auto;
+  bottom: auto;
 }
