@@ -1,11 +1,6 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Connection,
-  Handle,
-  Position,
-  useReactFlow,
-} from "react-flow-renderer/nocss";
+import { Connection, Handle, Position, useReactFlow } from "reactflow";
 import cx from "classnames";
 import { colors, valueTypeColorMap } from "../util/colors";
 import { OutputSocketSpecJSON } from "behave-graph";

@@ -1,4 +1,4 @@
-import { Connection, ReactFlowInstance } from "react-flow-renderer/nocss";
+import { Connection, ReactFlowInstance } from "reactflow";
 import { getSocketsByNodeTypeAndHandleType } from "./getSocketsByNodeTypeAndHandleType";
 import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { NodeSpecJSON } from "behave-graph";

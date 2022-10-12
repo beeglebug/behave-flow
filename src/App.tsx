@@ -8,25 +8,22 @@ import ReactFlow, {
   useEdgesState,
   useNodesState,
   XYPosition,
-} from "react-flow-renderer/nocss";
+} from "reactflow";
 import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
 import BehaveControls from "./components/Controls";
 import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
-import CustomEdge from "./components/CustomEdge";
 import NodePicker from "./components/NodePicker";
 import { getNodePickerFilters } from "./util/getPickerFilters";
 import { calculateNewEdge } from "./util/calculateNewEdge";
 
+import "reactflow/dist/base.css";
+
 const graphJSON = rawGraphJSON as GraphJSON;
 
 const [initialNodes, initialEdges] = behaveToFlow(graphJSON);
-
-const edgeTypes = {
-  default: CustomEdge,
-};
 
 function Flow() {
   const [nodePickerVisibility, setNodePickerVisibility] =
@@ -127,14 +124,13 @@ function Flow() {
   return (
     <ReactFlow
       nodeTypes={customNodeTypes}
-      edgeTypes={edgeTypes}
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       onConnectStart={handleStartConnect}
-      onConnectStop={handleStopConnect}
+      onConnectEnd={handleStopConnect}
       fitView
       fitViewOptions={{ maxZoom: 1 }}
       onPaneClick={handlePaneClick}
@@ -143,7 +139,7 @@ function Flow() {
       <Controls />
       <Background
         variant={BackgroundVariant.Lines}
-        color="#353639"
+        color="#2a2b2d"
         style={{ backgroundColor: "#1E1F22" }}
       />
       <BehaveControls />

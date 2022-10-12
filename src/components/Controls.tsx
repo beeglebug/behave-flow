@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoadModal } from "./LoadModal";
 import { SaveModal } from "./SaveModal";
 import { flowToBehave } from "../transformers/flowToBehave";
-import { useReactFlow } from "react-flow-renderer/nocss";
+import { useReactFlow } from "reactflow";
 
 const Controls = () => {
   const [loadModalOpen, setLoadModalOpen] = useState(false);

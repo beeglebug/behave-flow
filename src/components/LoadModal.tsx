@@ -1,6 +1,6 @@
 import { GraphJSON } from "behave-graph";
 import { FC, useState } from "react";
-import { useReactFlow } from "react-flow-renderer/nocss";
+import { useReactFlow } from "reactflow";
 import { behaveToFlow } from "../transformers/behaveToFlow";
 import { autoLayout } from "../util/autoLayout";
 import { hasPositionMetaData } from "../util/hasPositionMetaData";

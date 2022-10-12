@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useReactFlow } from "react-flow-renderer/nocss";
+import { useReactFlow } from "reactflow";
 import { Modal } from "./Modal";
 
 export type ClearModalProps = {

@@ -1,4 +1,4 @@
-import { Edge } from "react-flow-renderer/nocss";
+import { Edge } from "reactflow";
 
 export const isHandleConnected = (
   edges: Edge[],

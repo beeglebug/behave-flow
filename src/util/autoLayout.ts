@@ -1,4 +1,4 @@
-import { Edge, Node } from "react-flow-renderer/nocss";
+import { Edge, Node } from "reactflow";
 
 export const autoLayout = (nodes: Node[], edges: Edge[]) => {
   let x = 0;

@@ -1,4 +1,4 @@
-import { Node, OnConnectStartParams } from "react-flow-renderer/nocss";
+import { Node, OnConnectStartParams } from "reactflow";
 import { NodeSpecJSON } from "behave-graph";
 import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { NodePickerFilters } from "../components/NodePicker";

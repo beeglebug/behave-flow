@@ -1,5 +1,5 @@
 import { GraphJSON, NodeJSON } from "behave-graph";
-import { Edge, Node } from "react-flow-renderer/nocss";
+import { Edge, Node } from "reactflow";
 
 const isNullish = (value: any): value is null | undefined =>
   value === undefined || value === null;

@@ -1,5 +1,5 @@
 import { FC, useMemo, useRef, useState } from "react";
-import { useEdges, useNodes } from "react-flow-renderer/nocss";
+import { useEdges, useNodes } from "reactflow";
 import { flowToBehave } from "../transformers/flowToBehave";
 import { Modal } from "./Modal";
 

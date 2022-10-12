@@ -1,4 +1,4 @@
-import { NodeTypes } from "react-flow-renderer/nocss";
+import { NodeTypes } from "reactflow";
 import { NodeSpecJSON } from "behave-graph";
 import specJson from "behave-graph/dist/node-spec.json";
 import { Node } from "../components/Node";
