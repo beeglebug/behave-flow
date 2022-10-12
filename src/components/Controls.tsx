@@ -19,9 +19,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoadModal } from "./LoadModal";
 import { SaveModal } from "./SaveModal";
 import { flowToBehave } from "../transformers/flowToBehave";
-import { useReactFlow } from "reactflow";
+import { useReactFlow, Controls, ControlButton } from "reactflow";
 
-const Controls = () => {
+const CustomControls = () => {
   const [loadModalOpen, setLoadModalOpen] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
@@ -42,58 +42,23 @@ const Controls = () => {
 
   return (
     <>
-      <div className="absolute top-4 right-4 bg-white z-10 text-sm flex">
-        <div
-          className="cursor-pointer border-r bg-white hover:bg-gray-100"
-          title="Help"
-          onClick={() => setHelpModalOpen(true)}
-        >
-          <FontAwesomeIcon
-            icon={faQuestion}
-            className="w-3 p-2 text-gray-700 align-middle"
-          />
-        </div>
-        <div
-          className="cursor-pointer border-r bg-white hover:bg-gray-100"
-          title="Load"
-          onClick={() => setLoadModalOpen(true)}
-        >
-          <FontAwesomeIcon
-            icon={faUpload}
-            className="w-3 p-2 text-gray-700 align-middle"
-          />
-        </div>
-        <div
-          className="cursor-pointer border-r bg-white hover:bg-gray-100"
-          title="Save"
-          onClick={() => setSaveModalOpen(true)}
-        >
-          <FontAwesomeIcon
-            icon={faDownload}
-            className="w-3 p-2 text-gray-700 align-middle"
-          />
-        </div>
-        <div
-          className="cursor-pointer border-r bg-white hover:bg-gray-100"
-          title="Clear"
-          onClick={() => setClearModalOpen(true)}
-        >
-          <FontAwesomeIcon
-            icon={faTrash}
-            className="w-3 p-2 text-gray-700 align-middle"
-          />
-        </div>
-        <div
-          className="cursor-pointer border-r bg-white hover:bg-gray-100"
-          title="Run"
-          onClick={() => handleRun()}
-        >
-          <FontAwesomeIcon
-            icon={faPlay}
-            className="w-3 p-2 text-gray-700 align-middle"
-          />
-        </div>
-      </div>
+      <Controls>
+        <ControlButton title="Help" onClick={() => setHelpModalOpen(true)}>
+          <FontAwesomeIcon icon={faQuestion} />
+        </ControlButton>
+        <ControlButton title="Load" onClick={() => setLoadModalOpen(true)}>
+          <FontAwesomeIcon icon={faUpload} />
+        </ControlButton>
+        <ControlButton title="Save" onClick={() => setSaveModalOpen(true)}>
+          <FontAwesomeIcon icon={faDownload} />
+        </ControlButton>
+        <ControlButton title="Clear" onClick={() => setClearModalOpen(true)}>
+          <FontAwesomeIcon icon={faTrash} />
+        </ControlButton>
+        <ControlButton title="Run" onClick={() => handleRun()}>
+          <FontAwesomeIcon icon={faPlay} />
+        </ControlButton>
+      </Controls>
       <LoadModal open={loadModalOpen} onClose={() => setLoadModalOpen(false)} />
       <SaveModal open={saveModalOpen} onClose={() => setSaveModalOpen(false)} />
       <HelpModal open={helpModalOpen} onClose={() => setHelpModalOpen(false)} />
@@ -105,4 +70,4 @@ const Controls = () => {
   );
 };
 
-export default Controls;
+export default CustomControls;

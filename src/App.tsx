@@ -3,7 +3,6 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Connection,
-  Controls,
   OnConnectStartParams,
   useEdgesState,
   useNodesState,
@@ -12,7 +11,7 @@ import ReactFlow, {
 import { v4 as uuidv4 } from "uuid";
 import { behaveToFlow } from "./transformers/behaveToFlow";
 import { customNodeTypes } from "./util/customNodeTypes";
-import BehaveControls from "./components/Controls";
+import Controls from "./components/Controls";
 import rawGraphJSON from "./graph.json";
 import { GraphJSON } from "behave-graph";
 import NodePicker from "./components/NodePicker";
@@ -142,7 +141,6 @@ function Flow() {
         color="#2a2b2d"
         style={{ backgroundColor: "#1E1F22" }}
       />
-      <BehaveControls />
       {nodePickerVisibility && (
         <NodePicker
           position={nodePickerVisibility}
