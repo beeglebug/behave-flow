@@ -10,13 +10,6 @@ type NodeProps = FlowNodeProps & {
   spec: NodeSpecJSON;
 };
 
-const getTitle = (type: string) => {
-  const tokens = type.split("/");
-  const end = tokens[Math.min(tokens.length - 1, 1)]; // handles polymorphic node naming structure
-  const spaces = end.replace(/([A-Z])/g, " $1");
-  return spaces.charAt(0).toUpperCase() + spaces.slice(1);
-};
-
 const getPairs = <T, U>(arr1: T[], arr2: U[]) => {
   const max = Math.max(arr1.length, arr2.length);
   const pairs = [];
@@ -33,7 +26,7 @@ export const Node = ({ id, data, spec, selected }: NodeProps) => {
   const pairs = getPairs(spec.inputs, spec.outputs);
   return (
     <NodeContainer
-      title={getTitle(spec.type)}
+      title={spec.label}
       category={spec.category}
       selected={selected}
     >
