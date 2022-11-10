@@ -1,6 +1,6 @@
 import {
   DefaultLogger,
-  GraphEvaluator,
+  Engine,
   ManualLifecycleEventEmitter,
   readGraphFromJSON,
   registerCoreProfile,
@@ -23,6 +23,7 @@ import { LoadModal } from "./LoadModal";
 import { SaveModal } from "./SaveModal";
 import { flowToBehave } from "../transformers/flowToBehave";
 import { useReactFlow, Controls, ControlButton } from "reactflow";
+import { sleep } from "../util/sleep";
 
 const CustomControls = () => {
   const [loadModalOpen, setLoadModalOpen] = useState(false);
@@ -33,40 +34,37 @@ const CustomControls = () => {
 
   const handleRun = async () => {
     const registry = new Registry();
-    registerCoreProfile(registry);
-    registerSceneProfile(registry);
-    registry.implementations.register("ILogger", new DefaultLogger());
+    const logger = new DefaultLogger();
     const manualLifecycleEventEmitter = new ManualLifecycleEventEmitter();
-    registry.implementations.register(
-      "ILifecycleEventEmitter",
-      manualLifecycleEventEmitter
-    );
-
+    registerCoreProfile(registry, logger, manualLifecycleEventEmitter);
+    registerSceneProfile(registry);
+    
     const nodes = instance.getNodes();
     const edges = instance.getEdges();
     const graphJson = flowToBehave(nodes, edges);
     const graph = readGraphFromJSON(graphJson, registry);
 
-    const graphEvaluator = new GraphEvaluator(graph);
+    const engine = new Engine(graph);
 
-    await graphEvaluator.executeAll();
 
     if (manualLifecycleEventEmitter.startEvent.listenerCount > 0) {
       manualLifecycleEventEmitter.startEvent.emit();
-      await graphEvaluator.executeAllAsync(5);
+      await engine.executeAllAsync(5);
     }
 
     if (manualLifecycleEventEmitter.tickEvent.listenerCount > 0) {
-      const iteations = 5;
-      for (let tick = 0; tick < iteations; tick++) {
+      const iterations = 20;
+      const tickDuration = 0.01;
+      for (let tick = 0; tick < iterations; tick++) {
         manualLifecycleEventEmitter.tickEvent.emit();
-        await graphEvaluator.executeAllAsync(5);
+        engine.executeAllSync(tickDuration);
+        await sleep( tickDuration );
       }
     }
 
     if (manualLifecycleEventEmitter.endEvent.listenerCount > 0) {
       manualLifecycleEventEmitter.endEvent.emit();
-      await graphEvaluator.executeAllAsync(5);
+      await engine.executeAllAsync(5);
     }
   };
 
